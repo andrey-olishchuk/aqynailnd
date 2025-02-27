@@ -271,7 +271,7 @@ export default function Home() {
                   <p className="text-muted-foreground mb-4">Get started with Aqyn in minutes:</p>
                   <CodeBlock
                     code={`# Clone the repository
-git clone https://github.com/your-org/aqyn.git
+git clone https://github.com/vossmoos/aqynai.git
 cd aqyn
 
 # Start all services
