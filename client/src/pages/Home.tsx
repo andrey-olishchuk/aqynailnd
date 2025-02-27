@@ -246,7 +246,7 @@ export default function Home() {
               Qdrant vector store, MinIO object storage, and Dagster data pipelines.
             </p>
             <div className="flex gap-4 justify-center">
-              <Button size="lg">Get Started</Button>
+              <Button size="lg">Ask Aqyn</Button>
               <Button size="lg" variant="outline">View on GitHub</Button>
             </div>
           </div>
