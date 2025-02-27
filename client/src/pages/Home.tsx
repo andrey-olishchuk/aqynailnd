@@ -171,67 +171,71 @@ export default function Home() {
         </section>
       </div>
 
-      {/* Quick Start Section */}
+      {/* Quick Start and Chat Sections in Two Columns */}
       <section className="container py-16">
-        <h2 className="text-3xl font-bold text-center mb-8">Quick Start</h2>
-        <div className="max-w-2xl mx-auto">
-          <Card className="backdrop-blur-sm bg-card/50">
-            <div className="p-6">
-              <p className="text-muted-foreground mb-4">Get started with Aqyn in minutes:</p>
-              <CodeBlock
-                code={`# Clone the repository
+        <div className="grid lg:grid-cols-2 gap-8">
+          {/* Quick Start Column */}
+          <div>
+            <h2 className="text-3xl font-bold mb-8">Quick Start</h2>
+            <Card className="backdrop-blur-sm bg-card/50">
+              <div className="p-6">
+                <p className="text-muted-foreground mb-4">Get started with Aqyn in minutes:</p>
+                <CodeBlock
+                  code={`# Clone the repository
 git clone https://github.com/your-org/aqyn.git
 cd aqyn
 
 # Start all services
 docker compose up -d`}
-                language="bash"
-              />
-            </div>
-          </Card>
-        </div>
-      </section>
-
-      {/* Chat Section */}
-      <section className="container py-16">
-        <Card className="max-w-2xl mx-auto backdrop-blur-sm bg-card/50">
-          <div className="h-[500px] flex flex-col">
-            <ScrollArea className="flex-1 p-4">
-              {messages.map((msg) => (
-                <div
-                  key={msg.id}
-                  className={`mb-4 ${
-                    msg.role === "user" ? "text-right" : "text-left"
-                  }`}
-                >
-                  <div
-                    className={`inline-block p-3 rounded-lg ${
-                      msg.role === "user"
-                        ? "bg-primary text-primary-foreground"
-                        : "bg-muted"
-                    }`}
-                  >
-                    {msg.content}
-                  </div>
-                </div>
-              ))}
-            </ScrollArea>
-            <form onSubmit={handleSubmit} className="p-4 border-t">
-              <div className="flex gap-2">
-                <Textarea
-                  ref={chatInputRef}
-                  value={input}
-                  onChange={(e) => setInput(e.target.value)}
-                  placeholder="Ask about the framework..."
-                  className="min-h-[60px]"
+                  language="bash"
                 />
-                <Button type="submit" className="self-end">
-                  <Send className="h-4 w-4" />
-                </Button>
               </div>
-            </form>
+            </Card>
           </div>
-        </Card>
+
+          {/* Chat Column */}
+          <div>
+            <h2 className="text-3xl font-bold mb-8">Try it Now</h2>
+            <Card className="backdrop-blur-sm bg-card/50">
+              <div className="h-[500px] flex flex-col">
+                <ScrollArea className="flex-1 p-4">
+                  {messages.map((msg) => (
+                    <div
+                      key={msg.id}
+                      className={`mb-4 ${
+                        msg.role === "user" ? "text-right" : "text-left"
+                      }`}
+                    >
+                      <div
+                        className={`inline-block p-3 rounded-lg ${
+                          msg.role === "user"
+                            ? "bg-primary text-primary-foreground"
+                            : "bg-muted"
+                        }`}
+                      >
+                        {msg.content}
+                      </div>
+                    </div>
+                  ))}
+                </ScrollArea>
+                <form onSubmit={handleSubmit} className="p-4 border-t">
+                  <div className="flex gap-2">
+                    <Textarea
+                      ref={chatInputRef}
+                      value={input}
+                      onChange={(e) => setInput(e.target.value)}
+                      placeholder="Ask about the framework..."
+                      className="min-h-[60px]"
+                    />
+                    <Button type="submit" className="self-end">
+                      <Send className="h-4 w-4" />
+                    </Button>
+                  </div>
+                </form>
+              </div>
+            </Card>
+          </div>
+        </div>
       </section>
 
       {/* Feature Cards */}
