@@ -333,21 +333,21 @@ docker compose up -d`}
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="p-6 rounded-lg bg-card">
-              <h3 className="text-xl font-semibold mb-3">AI-Powered Search</h3>
+              <h3 className="text-xl font-semibold mb-3">Automated Data Loaders</h3>
               <p className="text-muted-foreground">
-                Intelligent search capabilities powered by state-of-the-art language models
+                Built-in support for processing and loading the most common document types
               </p>
             </div>
             <div className="p-6 rounded-lg bg-card">
-              <h3 className="text-xl font-semibold mb-3">RAG Framework</h3>
+              <h3 className="text-xl font-semibold mb-3">Visual Pipeline Editor</h3>
               <p className="text-muted-foreground">
-                Retrieval Augmented Generation for accurate and contextual responses
+                Intuitive visual interface for building and customizing RAG pipelines
               </p>
             </div>
             <div className="p-6 rounded-lg bg-card">
-              <h3 className="text-xl font-semibold mb-3">Easy Integration</h3>
+              <h3 className="text-xl font-semibold mb-3">Python Extensibility</h3>
               <p className="text-muted-foreground">
-                Simple APIs and SDKs for seamless integration with your existing stack
+                Extend and customize pipelines with your own Python components
               </p>
             </div>
           </div>
