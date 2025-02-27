@@ -174,7 +174,7 @@ export default function Home() {
       {/* Quick Start and Chat Sections in Two Columns */}
       <section className="container px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-4 md:grid-cols-8 lg:grid-cols-12 gap-8">
-          <div className="col-span-4 md:col-span-8 lg:col-span-10 lg:col-start-2">
+          <div className="col-span-4 md:col-span-8 lg:col-span-8 lg:col-start-3">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               {/* Quick Start Column */}
               <div className="lg:col-span-1">
@@ -245,7 +245,7 @@ docker compose up -d`}
       {/* Feature Cards */}
       <section className="container px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-4 md:grid-cols-8 lg:grid-cols-12 gap-8">
-          <div className="col-span-4 md:col-span-8 lg:col-span-10 lg:col-start-2">
+          <div className="col-span-4 md:col-span-8 lg:col-span-8 lg:col-start-3">
             <h2 className="text-3xl font-bold text-center mb-12">Key Features</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <Card className="p-6 backdrop-blur-sm bg-card/50">
@@ -274,7 +274,7 @@ docker compose up -d`}
       {/* Technical FAQ Section */}
       <section className="container px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-4 md:grid-cols-8 lg:grid-cols-12 gap-8">
-          <div className="col-span-4 md:col-span-6 md:col-start-2 lg:col-span-8 lg:col-start-3">
+          <div className="col-span-4 md:col-span-8 lg:col-span-8 lg:col-start-3">
             <h2 className="text-3xl font-bold text-center mb-12">Technical FAQ</h2>
             <div className="w-full">
               <Accordion type="single" collapsible className="w-full">
@@ -304,7 +304,7 @@ docker compose up -d`}
       {/* Technology Stack Section */}
       <section className="container px-4 sm:px-6 lg:px-8 py-16 bg-muted/30">
         <div className="grid grid-cols-4 md:grid-cols-8 lg:grid-cols-12 gap-8">
-          <div className="col-span-4 md:col-span-6 md:col-start-2 lg:col-span-8 lg:col-start-3">
+          <div className="col-span-4 md:col-span-8 lg:col-span-8 lg:col-start-3">
             <h2 className="text-3xl font-bold text-center mb-12">Technology Stack</h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-primary">
               <div className="flex flex-col items-center gap-2">
@@ -331,7 +331,7 @@ docker compose up -d`}
       {/* Community Section */}
       <section className="container px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-4 md:grid-cols-8 lg:grid-cols-12 gap-8">
-          <div className="col-span-4 md:col-span-6 md:col-start-2 lg:col-span-8 lg:col-start-3 text-center">
+          <div className="col-span-4 md:col-span-8 lg:col-span-8 lg:col-start-3 text-center">
             <h2 className="text-3xl font-bold mb-8">Join Our Community</h2>
             <div className="flex flex-wrap gap-6 justify-center">
               <Button variant="outline" size="lg">
