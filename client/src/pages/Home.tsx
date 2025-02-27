@@ -25,11 +25,10 @@ const LangFlowIcon = () => (
       fillOpacity="0.2"
     />
     <path
-      fill="currentColor"
-      d="M30 40 L70 40 M50 20 L50 80"
-      strokeWidth="4"
+      fill="none"
       stroke="currentColor"
-      fillOpacity="0"
+      strokeWidth="4"
+      d="M30 30 L70 70 M20 40 L60 80 M40 20 L80 60"
     />
   </svg>
 );
