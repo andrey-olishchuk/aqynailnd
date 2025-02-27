@@ -4,17 +4,24 @@ const sections = [
   {
     title: "Getting Started",
     content: `
+# Quick Start
+
+\`\`\`bash
+# Clone the repository
+git clone https://github.com/vossmoos/aqynai.git
+cd aqynai/docker
+
+# Start all services
+docker compose up -d
+\`\`\`
+
 # Installation
+
+For manual installation:
 
 \`\`\`bash
 npm install ragstack
 \`\`\`
-
-# Basic Usage
-
-1. Initialize your project
-2. Configure your environment
-3. Start building your RAG application
 
 # Configuration
 
