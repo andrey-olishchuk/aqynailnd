@@ -17,7 +17,7 @@ export async function registerRoutes(app: Express) {
     }
 
     const newMessage = await storage.addChatMessage(validation.data);
-    
+
     const messages = await storage.getChatMessages();
     const aiResponse = await generateChatResponse(
       messages.map(m => ({ role: m.role, content: m.content }))
@@ -26,7 +26,10 @@ export async function registerRoutes(app: Express) {
     const aiMessage = await storage.addChatMessage({
       role: "assistant",
       content: JSON.stringify(aiResponse),
-      metadata: null
+      metadata: {
+        type: "simulated_response",
+        timestamp: new Date().toISOString()
+      }
     });
 
     res.json({ userMessage: newMessage, aiMessage });
