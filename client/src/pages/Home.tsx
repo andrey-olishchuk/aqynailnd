@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Send } from "lucide-react";
-import { SiGithub, SiDiscord, SiYoutube, SiTypescript, SiReact, SiTailwindcss, SiOpenai, SiPython, SiMinio, SiDocker, SiKubernetes } from "react-icons/si";
+import { SiGithub, SiDiscord, SiYoutube, SiPython, SiMinio, SiDocker, SiKubernetes } from "react-icons/si";
 import { CodeBlock } from "@/components/ui/code-block";
 import WaveBackground from "@/components/WaveBackground";
 import {
@@ -13,6 +13,93 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+
+// Custom SVG icons for logos not available in react-icons
+const LangFlowIcon = () => (
+  <svg viewBox="0 0 100 100" className="w-12 h-12 transition-transform hover:scale-110">
+    <path
+      fill="currentColor"
+      d="M50 5 L90 25 L90 75 L50 95 L10 75 L10 25 Z"
+      strokeWidth="2"
+      stroke="currentColor"
+      fillOpacity="0.2"
+    />
+    <path
+      fill="currentColor"
+      d="M30 40 L70 40 M50 20 L50 80"
+      strokeWidth="4"
+      stroke="currentColor"
+      fillOpacity="0"
+    />
+  </svg>
+);
+
+const LangChainIcon = () => (
+  <svg viewBox="0 0 100 100" className="w-12 h-12 transition-transform hover:scale-110">
+    <path
+      fill="currentColor"
+      d="M20 20 L50 10 L80 20 L80 80 L50 90 L20 80 Z"
+      strokeWidth="2"
+      stroke="currentColor"
+      fillOpacity="0.2"
+    />
+    <text
+      x="50"
+      y="60"
+      fontSize="40"
+      textAnchor="middle"
+      fill="currentColor"
+      fontFamily="Arial"
+    >
+      🦜
+    </text>
+  </svg>
+);
+
+const DagsterIcon = () => (
+  <svg viewBox="0 0 100 100" className="w-12 h-12 transition-transform hover:scale-110">
+    <circle
+      cx="50"
+      cy="50"
+      r="40"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="4"
+    />
+    <path
+      fill="currentColor"
+      d="M30 50 L70 50 M50 30 L50 70"
+      strokeWidth="4"
+      stroke="currentColor"
+    />
+  </svg>
+);
+
+const QdrantIcon = () => (
+  <svg viewBox="0 0 100 100" className="w-12 h-12 transition-transform hover:scale-110">
+    <path
+      fill="currentColor"
+      d="M10 50 L50 10 L90 50 L50 90 Z"
+      strokeWidth="2"
+      stroke="currentColor"
+      fillOpacity="0.2"
+    />
+    <path
+      fill="currentColor"
+      d="M30 50 L70 50 M50 30 L50 70"
+      strokeWidth="4"
+      stroke="currentColor"
+      fillOpacity="0"
+    />
+    <circle
+      cx="50"
+      cy="50"
+      r="5"
+      fill="currentColor"
+    />
+  </svg>
+);
+
 
 // Simulated chat messages
 const INITIAL_MESSAGES = [
@@ -296,11 +383,11 @@ docker compose up -d`}
           <div className="max-w-5xl mx-auto">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-12 place-items-center text-primary">
               <div className="flex flex-col items-center gap-3">
-                <span className="text-3xl">⚡</span>
+                <LangFlowIcon />
                 <span>LangFlow</span>
               </div>
               <div className="flex flex-col items-center gap-3">
-                <span className="text-3xl">🦜</span>
+                <LangChainIcon />
                 <span>LangChain</span>
               </div>
               <div className="flex flex-col items-center gap-3">
@@ -308,11 +395,11 @@ docker compose up -d`}
                 <span>Python</span>
               </div>
               <div className="flex flex-col items-center gap-3">
-                <span className="text-3xl">🔍</span>
+                <QdrantIcon />
                 <span>Qdrant</span>
               </div>
               <div className="flex flex-col items-center gap-3">
-                <span className="text-3xl">📊</span>
+                <DagsterIcon />
                 <span>Dagster</span>
               </div>
               <div className="flex flex-col items-center gap-3">
