@@ -272,7 +272,7 @@ export default function Home() {
                   <CodeBlock
                     code={`# Clone the repository
 git clone https://github.com/vossmoos/aqynai.git
-cd aqyn
+cd aqyn/docker
 
 # Start all services
 docker compose up -d`}
