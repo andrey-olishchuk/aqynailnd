@@ -284,7 +284,7 @@ docker compose up -d`}
 
             {/* Chat Column */}
             <div>
-              <h2 className="text-3xl font-bold mb-8">Try it Now</h2>
+              <h2 className="text-3xl font-bold mb-8">Ask About Aqyn</h2>
               <Card className="backdrop-blur-sm bg-card/50">
                 <div className="h-[500px] flex flex-col">
                   <ScrollArea className="flex-1 p-4">
@@ -313,7 +313,7 @@ docker compose up -d`}
                         ref={chatInputRef}
                         value={input}
                         onChange={(e) => setInput(e.target.value)}
-                        placeholder="Ask about the framework..."
+                        placeholder="Ask anything about the framework..."
                         className="min-h-[60px]"
                       />
                       <Button type="submit" className="self-end">
