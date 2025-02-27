@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -68,6 +68,7 @@ const FAQ_ITEMS = [
 export default function Home() {
   const [messages, setMessages] = useState(INITIAL_MESSAGES);
   const [input, setInput] = useState("");
+  const chatInputRef = useRef<HTMLTextAreaElement>(null);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -89,6 +90,11 @@ export default function Home() {
     setInput("");
   };
 
+  const focusChat = () => {
+    chatInputRef.current?.focus();
+    chatInputRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <div className="min-h-screen bg-background">
       {/* Hero Section with Graphical Elements */}
@@ -105,7 +111,7 @@ export default function Home() {
           <div className="flex items-center mb-16 px-4">
             <div className="flex items-center gap-2 text-2xl font-bold">
               <div className="size-8 rounded bg-primary"></div>
-              RAGStack
+              Aqyn
             </div>
           </div>
 
@@ -117,7 +123,7 @@ export default function Home() {
               A modern framework for building AI applications with RAG capabilities
             </p>
             <div className="flex gap-4 justify-center">
-              <Button size="lg">Get Started</Button>
+              <Button size="lg" onClick={focusChat}>Ask AI Assistant</Button>
               <Button size="lg" variant="outline">
                 View on GitHub
               </Button>
@@ -153,6 +159,7 @@ export default function Home() {
             <form onSubmit={handleSubmit} className="p-4 border-t">
               <div className="flex gap-2">
                 <Textarea
+                  ref={chatInputRef}
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   placeholder="Ask about the framework..."
