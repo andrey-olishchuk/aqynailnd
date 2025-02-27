@@ -1,7 +1,20 @@
 import { Card } from "@/components/ui/card";
-import { SiPython, SiDocker, SiKubernetes, SiMinio } from "react-icons/si";
+import { 
+  SiPython, 
+  SiDocker, 
+  SiKubernetes, 
+  SiMinio, 
+  SiTypescript, 
+  SiReact, 
+  SiTailwindcss, 
+  SiOpenai 
+} from "react-icons/si";
 
 const logos = [
+  { name: "TypeScript", Icon: SiTypescript },
+  { name: "React", Icon: SiReact },
+  { name: "Tailwind CSS", Icon: SiTailwindcss },
+  { name: "OpenAI", Icon: SiOpenai },
   { name: "LangFlow", icon: "⚡" },
   { name: "LangChain", icon: "🦜" },
   { name: "Python", Icon: SiPython },
