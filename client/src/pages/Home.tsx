@@ -158,8 +158,7 @@ export default function Home() {
               Build AI-powered Applications
             </h1>
             <p className="text-xl text-muted-foreground mb-8">
-              A battle-tested set of components to deploy your own RAG-powered knowledge base in minutes. 
-              Secure, scalable, and ready for production use.
+              A framework for building self-hosted Retrieval-Augmented Generation (RAG) applications with preconfigured, production-ready components like LangFlow, Dagster, and Qdrant.
               Install your own Aqyn instance today.
             </p>
             <div className="flex gap-4 justify-center">
@@ -171,6 +170,27 @@ export default function Home() {
           </div>
         </section>
       </div>
+
+      {/* Quick Start Section */}
+      <section className="container py-16">
+        <h2 className="text-3xl font-bold text-center mb-8">Quick Start</h2>
+        <div className="max-w-2xl mx-auto">
+          <Card className="backdrop-blur-sm bg-card/50">
+            <div className="p-6">
+              <p className="text-muted-foreground mb-4">Get started with Aqyn in minutes:</p>
+              <CodeBlock
+                code={`# Clone the repository
+git clone https://github.com/your-org/aqyn.git
+cd aqyn
+
+# Start all services
+docker compose up -d`}
+                language="bash"
+              />
+            </div>
+          </Card>
+        </div>
+      </section>
 
       {/* Chat Section */}
       <section className="container py-16">
