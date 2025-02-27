@@ -172,7 +172,7 @@ export default function Home() {
 
       {/* Quick Start and Chat Sections in Two Columns */}
       <section className="container mx-auto px-4 py-16">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Quick Start Column */}
             <div>
@@ -241,7 +241,7 @@ docker compose up -d`}
 
       {/* Feature Cards */}
       <section className="container mx-auto px-4 py-16">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="p-6 rounded-lg bg-card">
               <h3 className="text-xl font-semibold mb-3">AI-Powered Search</h3>
@@ -267,7 +267,7 @@ docker compose up -d`}
 
       {/* Technical FAQ Section */}
       <section className="container mx-auto px-4 py-16">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-5xl mx-auto">
           <h2 className="text-3xl font-bold text-center mb-12">Technical FAQ</h2>
           <div className="w-full">
             <Accordion type="single" collapsible className="w-full">
@@ -297,7 +297,7 @@ docker compose up -d`}
       <section className="py-24 bg-muted/30">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-16">Technology Stack</h2>
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-5xl mx-auto">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-12 place-items-center text-primary">
               <div className="flex flex-col items-center gap-3">
                 <SiTypescript className="w-12 h-12 transition-transform hover:scale-110" />
@@ -322,7 +322,7 @@ docker compose up -d`}
 
       {/* Community Section */}
       <section className="container mx-auto px-4 py-16">
-        <div className="max-w-4xl mx-auto text-center">
+        <div className="max-w-5xl mx-auto text-center">
           <h2 className="text-3xl font-bold mb-8">Join Our Community</h2>
           <div className="flex flex-wrap gap-6 justify-center">
             <Button variant="outline" size="lg">
