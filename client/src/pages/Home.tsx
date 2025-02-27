@@ -120,10 +120,12 @@ export default function Home() {
               Build AI-powered Applications
             </h1>
             <p className="text-xl text-muted-foreground mb-8">
-              A modern framework for building AI applications with RAG capabilities
+              A battle-tested set of components to deploy your own RAG-powered knowledge base in minutes. 
+              Secure, scalable, and ready for production use.
+              Install your own Aqyn instance today.
             </p>
             <div className="flex gap-4 justify-center">
-              <Button size="lg" onClick={focusChat}>Ask AI Assistant</Button>
+              <Button size="lg" onClick={focusChat}>Ask our Aqyn</Button>
               <Button size="lg" variant="outline">
                 View on GitHub
               </Button>
