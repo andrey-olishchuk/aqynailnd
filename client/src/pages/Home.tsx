@@ -76,26 +76,26 @@ const DagsterIcon = () => (
 
 const QdrantIcon = () => (
   <svg viewBox="0 0 100 100" className="w-12 h-12 transition-transform hover:scale-110">
-    <path
-      fill="currentColor"
-      d="M10 50 L50 10 L90 50 L50 90 Z"
-      strokeWidth="2"
-      stroke="currentColor"
-      fillOpacity="0.2"
-    />
-    <path
-      fill="currentColor"
-      d="M30 50 L70 50 M50 30 L50 70"
-      strokeWidth="4"
-      stroke="currentColor"
-      fillOpacity="0"
-    />
-    <circle
-      cx="50"
-      cy="50"
-      r="5"
-      fill="currentColor"
-    />
+    <g transform="translate(20, 20) scale(0.6)">
+      {/* Front face */}
+      <path
+        fill="currentColor"
+        fillOpacity="0.8"
+        d="M50 20 L80 35 L80 65 L50 80 L20 65 L20 35 Z"
+      />
+      {/* Top edge */}
+      <path
+        fill="currentColor"
+        fillOpacity="0.6"
+        d="M50 20 L80 35 L65 45 L35 30 Z"
+      />
+      {/* Side edge */}
+      <path
+        fill="currentColor"
+        fillOpacity="0.4"
+        d="M80 35 L80 65 L65 75 L65 45 Z"
+      />
+    </g>
   </svg>
 );
 
