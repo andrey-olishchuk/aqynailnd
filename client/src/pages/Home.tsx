@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Send } from "lucide-react";
-import { SiGithub, SiDiscord, SiYoutube, SiTypescript, SiReact, SiTailwindcss, SiOpenai } from "react-icons/si";
+import { SiGithub, SiDiscord, SiYoutube, SiTypescript, SiReact, SiTailwindcss, SiOpenai, SiPython, SiMinio, SiDocker, SiKubernetes } from "react-icons/si";
 import { CodeBlock } from "@/components/ui/code-block";
 import WaveBackground from "@/components/WaveBackground";
 import {
@@ -289,27 +289,43 @@ docker compose up -d`}
         </div>
       </section>
 
-      {/* Technology Stack Section - This one is already well aligned */}
+      {/* Technology Stack Section */}
       <section className="py-24 bg-muted/30">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-16">Technology Stack</h2>
           <div className="max-w-5xl mx-auto">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-12 place-items-center text-primary">
               <div className="flex flex-col items-center gap-3">
-                <SiTypescript className="w-12 h-12 transition-transform hover:scale-110" />
-                <span>TypeScript</span>
+                <span className="text-3xl">⚡</span>
+                <span>LangFlow</span>
               </div>
               <div className="flex flex-col items-center gap-3">
-                <SiReact className="w-12 h-12 transition-transform hover:scale-110" />
-                <span>React</span>
+                <span className="text-3xl">🦜</span>
+                <span>LangChain</span>
               </div>
               <div className="flex flex-col items-center gap-3">
-                <SiTailwindcss className="w-12 h-12 transition-transform hover:scale-110" />
-                <span>Tailwind</span>
+                <SiPython className="w-12 h-12 transition-transform hover:scale-110" />
+                <span>Python</span>
               </div>
               <div className="flex flex-col items-center gap-3">
-                <SiOpenai className="w-12 h-12 transition-transform hover:scale-110" />
-                <span>OpenAI</span>
+                <span className="text-3xl">🔍</span>
+                <span>Qdrant</span>
+              </div>
+              <div className="flex flex-col items-center gap-3">
+                <span className="text-3xl">📊</span>
+                <span>Dagster</span>
+              </div>
+              <div className="flex flex-col items-center gap-3">
+                <SiMinio className="w-12 h-12 transition-transform hover:scale-110" />
+                <span>MinIO</span>
+              </div>
+              <div className="flex flex-col items-center gap-3">
+                <SiDocker className="w-12 h-12 transition-transform hover:scale-110" />
+                <span>Docker</span>
+              </div>
+              <div className="flex flex-col items-center gap-3">
+                <SiKubernetes className="w-12 h-12 transition-transform hover:scale-110" />
+                <span>Kubernetes</span>
               </div>
             </div>
           </div>
