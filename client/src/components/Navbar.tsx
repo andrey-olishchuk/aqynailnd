@@ -8,7 +8,8 @@ export default function Navbar() {
       <div className="container flex h-16 items-center">
         <Link href="/">
           <a className="mr-8 flex items-center space-x-2">
-            <span className="text-xl font-bold tracking-wider bg-gradient-to-r from-primary/90 to-primary bg-clip-text text-transparent">
+            <div className="w-6 h-6 rounded-full bg-primary"></div>
+            <span className="text-xl font-bold tracking-wider">
               RAGStack
             </span>
           </a>
