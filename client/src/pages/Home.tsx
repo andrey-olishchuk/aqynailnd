@@ -3,8 +3,8 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Send } from "lucide-react";
-import { SiGithub, SiDiscord, SiYoutube, SiPython, SiMinio, SiDocker, SiKubernetes } from "react-icons/si";
+import { Send, Globe } from "lucide-react";
+import { SiGithub, SiLinkedin, SiPython, SiMinio, SiDocker, SiKubernetes } from "react-icons/si";
 import { CodeBlock } from "@/components/ui/code-block";
 import WaveBackground from "@/components/WaveBackground";
 import {
@@ -421,20 +421,38 @@ docker compose up -d`}
       {/* Community Section */}
       <section className="container mx-auto px-4 py-16">
         <div className="max-w-5xl mx-auto text-center">
-          <h2 className="text-3xl font-bold mb-8">Join Our Community</h2>
+          <h2 className="text-3xl font-bold mb-8">Connect With Us</h2>
           <div className="flex flex-wrap gap-6 justify-center">
-            <Button variant="outline" size="lg">
-              <SiGithub className="mr-2 h-5 w-5" />
-              GitHub
-            </Button>
-            <Button variant="outline" size="lg">
-              <SiDiscord className="mr-2 h-5 w-5" />
-              Discord
-            </Button>
-            <Button variant="outline" size="lg">
-              <SiYoutube className="mr-2 h-5 w-5" />
-              YouTube
-            </Button>
+            <a 
+              href="https://github.com/vossmoos/aqynai" 
+              target="_blank" 
+              rel="noopener noreferrer"
+            >
+              <Button variant="outline" size="lg">
+                <SiGithub className="mr-2 h-5 w-5" />
+                GitHub
+              </Button>
+            </a>
+            <a 
+              href="https://www.linkedin.com/company/vossmoos" 
+              target="_blank" 
+              rel="noopener noreferrer"
+            >
+              <Button variant="outline" size="lg">
+                <SiLinkedin className="mr-2 h-5 w-5" />
+                LinkedIn
+              </Button>
+            </a>
+            <a 
+              href="https://vossmoos.com" 
+              target="_blank" 
+              rel="noopener noreferrer"
+            >
+              <Button variant="outline" size="lg">
+                <Globe className="mr-2 h-5 w-5" />
+                VossMoos
+              </Button>
+            </a>
           </div>
         </div>
       </section>
