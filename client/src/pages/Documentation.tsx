@@ -6,6 +6,8 @@ const sections = [
     content: `
 # Quick Start
 
+Get started with Aqyn in minutes:
+
 \`\`\`bash
 # Clone the repository
 git clone https://github.com/vossmoos/aqynai.git
