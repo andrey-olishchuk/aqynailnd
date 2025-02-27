@@ -10,7 +10,7 @@ export default function Navbar() {
           <a className="mr-8 flex items-center space-x-2">
             <div className="w-6 h-6 rounded-full bg-primary"></div>
             <span className="text-xl font-bold tracking-wider">
-              RAGStack
+              Aqyn
             </span>
           </a>
         </Link>
