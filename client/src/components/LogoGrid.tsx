@@ -1,15 +1,15 @@
 import { Card } from "@/components/ui/card";
-import { SiPython, SiDocker, SiKubernetes, SiHelm } from "react-icons/si";
+import { SiPython, SiDocker, SiKubernetes, SiMinio } from "react-icons/si";
 
 const logos = [
   { name: "LangFlow", icon: "⚡" },
   { name: "LangChain", icon: "🦜" },
-  { name: "Dagster", icon: "📊" },
   { name: "Python", Icon: SiPython },
   { name: "Qdrant", icon: "🔍" },
+  { name: "Dagster", icon: "📊" },
+  { name: "MinIO", Icon: SiMinio },
   { name: "Docker", Icon: SiDocker },
-  { name: "Kubernetes", Icon: SiKubernetes },
-  { name: "Helm", Icon: SiHelm }
+  { name: "Kubernetes", Icon: SiKubernetes }
 ];
 
 export default function LogoGrid() {
