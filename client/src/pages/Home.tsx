@@ -28,7 +28,7 @@ const LangFlowIcon = () => (
       fill="none"
       stroke="currentColor"
       strokeWidth="4"
-      d="M30 30 L70 70 M20 40 L60 80 M40 20 L80 60"
+      d="M20 80 L80 20 M30 90 L90 30 M10 70 L70 10"
     />
   </svg>
 );
