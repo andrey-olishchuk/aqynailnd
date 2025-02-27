@@ -8,103 +8,84 @@ export default function WaveBackground() {
         viewBox="0 0 1440 800"
         xmlns="http://www.w3.org/2000/svg"
       >
-        {/* Background waves */}
-        <motion.path
-          initial={{ pathLength: 0, opacity: 0 }}
-          animate={{ pathLength: 1, opacity: 0.2 }}
-          transition={{ duration: 2, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
-          d="M 0 400 C 400 300, 800 500, 1440 400 V 800 H 0 Z"
-          className="fill-primary/10"
-        />
-        <motion.path
-          initial={{ pathLength: 0, opacity: 0 }}
-          animate={{ pathLength: 1, opacity: 0.15 }}
-          transition={{ duration: 2.5, repeat: Infinity, repeatType: "reverse", ease: "easeInOut", delay: 0.2 }}
-          d="M 0 500 C 600 400, 1000 600, 1440 500 V 800 H 0 Z"
-          className="fill-primary/5"
-        />
-
-        {/* 3D Lines Overlay */}
+        {/* Animated 3D Grid Lines */}
         <motion.path
           fill="none"
           stroke="currentColor"
-          strokeWidth="2"
-          className="stroke-primary/20"
+          strokeWidth="3"
+          className="stroke-primary/40"
           initial={{ pathLength: 0 }}
           animate={{ pathLength: 1 }}
           transition={{ duration: 3, repeat: Infinity, repeatType: "loop", ease: "linear" }}
-          d="M 100,100 C 200,100 300,200 400,100 S 500,0 600,100 S 700,200 800,100"
+          d="M -100,100 L 1540,100 M -100,300 L 1540,300 M -100,500 L 1540,500"
         />
         <motion.path
           fill="none"
           stroke="currentColor"
-          strokeWidth="2"
-          className="stroke-primary/15"
+          strokeWidth="3"
+          className="stroke-primary/40"
           initial={{ pathLength: 0 }}
           animate={{ pathLength: 1 }}
           transition={{ duration: 3, repeat: Infinity, repeatType: "loop", ease: "linear", delay: 0.5 }}
-          d="M 0,200 C 100,200 200,300 300,200 S 400,100 500,200 S 600,300 700,200"
+          d="M 100,-100 L 100,900 M 500,-100 L 500,900 M 900,-100 L 900,900 M 1300,-100 L 1300,900"
         />
+
+        {/* Diagonal Animated Lines */}
         <motion.path
           fill="none"
           stroke="currentColor"
           strokeWidth="2"
-          className="stroke-primary/25"
-          initial={{ pathLength: 0 }}
-          animate={{ pathLength: 1 }}
-          transition={{ duration: 3, repeat: Infinity, repeatType: "loop", ease: "linear", delay: 1 }}
-          d="M 200,300 C 300,300 400,400 500,300 S 600,200 700,300 S 800,400 900,300"
-        />
-
-        {/* Diagonal Lines */}
-        <motion.line
-          x1="0" y1="0"
-          x2="200" y2="200"
-          stroke="currentColor"
-          strokeWidth="1"
-          className="stroke-primary/10"
+          className="stroke-primary/30"
           initial={{ pathLength: 0 }}
           animate={{ pathLength: 1 }}
           transition={{ duration: 2, repeat: Infinity, repeatType: "loop", ease: "linear" }}
-        />
-        <motion.line
-          x1="1200" y1="0"
-          x2="1000" y2="200"
-          stroke="currentColor"
-          strokeWidth="1"
-          className="stroke-primary/10"
-          initial={{ pathLength: 0 }}
-          animate={{ pathLength: 1 }}
-          transition={{ duration: 2, repeat: Infinity, repeatType: "loop", ease: "linear", delay: 0.5 }}
+          d="M -100,0 L 300,800 M 300,0 L 700,800 M 700,0 L 1100,800 M 1100,0 L 1500,800"
         />
 
-        {/* Curved Lines */}
+        {/* Floating Curves */}
         <motion.path
           fill="none"
           stroke="currentColor"
-          strokeWidth="1.5"
-          className="stroke-primary/20"
+          strokeWidth="3"
+          className="stroke-primary/40"
           initial={{ pathLength: 0 }}
           animate={{ pathLength: 1 }}
           transition={{ duration: 4, repeat: Infinity, repeatType: "loop", ease: "linear" }}
-          d="M 0,400 Q 400,350 800,400 T 1440,400"
+          d="M -100,200 C 200,100 400,300 600,200 S 800,100 1000,200 S 1200,300 1540,200"
         />
         <motion.path
           fill="none"
           stroke="currentColor"
-          strokeWidth="1.5"
-          className="stroke-primary/15"
+          strokeWidth="3"
+          className="stroke-primary/40"
           initial={{ pathLength: 0 }}
           animate={{ pathLength: 1 }}
           transition={{ duration: 4, repeat: Infinity, repeatType: "loop", ease: "linear", delay: 1 }}
-          d="M 0,450 Q 400,400 800,450 T 1440,450"
+          d="M -100,400 C 200,300 400,500 600,400 S 800,300 1000,400 S 1200,500 1540,400"
         />
-        <motion.path
-          initial={{ pathLength: 0, opacity: 0 }}
-          animate={{ pathLength: 1, opacity: 0.1 }}
-          transition={{ duration: 3, repeat: Infinity, repeatType: "reverse", ease: "easeInOut", delay: 0.4 }}
-          d="M 0 600 C 200 500, 1200 700, 1440 600 V 800 H 0 Z"
-          className="fill-primary/10"
+
+        {/* Dynamic Circles */}
+        <motion.circle
+          cx="200"
+          cy="200"
+          r="50"
+          className="stroke-primary/30"
+          fill="none"
+          strokeWidth="2"
+          initial={{ scale: 0 }}
+          animate={{ scale: [0, 1, 0] }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.circle
+          cx="1200"
+          cy="400"
+          r="70"
+          className="stroke-primary/30"
+          fill="none"
+          strokeWidth="2"
+          initial={{ scale: 0 }}
+          animate={{ scale: [0, 1, 0] }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 2 }}
         />
       </motion.svg>
     </div>

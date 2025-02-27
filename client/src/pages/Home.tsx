@@ -137,10 +137,10 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
-      <section className="relative overflow-hidden">
+      <section className="relative overflow-hidden min-h-[600px]">
         <WaveBackground />
 
-        <div className="container mx-auto px-4 py-24">
+        <div className="container mx-auto px-4 py-24 relative z-10">
           {/* Logo */}
           <div className="flex items-center justify-center mb-16">
             <div className="flex items-center gap-2 text-2xl font-bold">
