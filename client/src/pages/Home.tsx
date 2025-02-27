@@ -242,7 +242,8 @@ export default function Home() {
             </h1>
             <p className="text-xl text-muted-foreground mb-8">
               A framework for building self-hosted Retrieval-Augmented Generation (RAG) applications 
-              with preconfigured, production-ready components.
+              with preconfigured, production-ready components based on Python LangFlow, LangChain, 
+              Qdrant vector store, MinIO object storage, and Dagster data pipelines.
             </p>
             <div className="flex gap-4 justify-center">
               <Button size="lg">Get Started</Button>
