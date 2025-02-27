@@ -171,76 +171,79 @@ export default function Home() {
       </section>
 
       {/* Quick Start and Chat Sections in Two Columns */}
-      <section className="container px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* Quick Start Column */}
-          <div>
-            <h2 className="text-3xl font-bold mb-8">Quick Start</h2>
-            <Card className="backdrop-blur-sm bg-card/50">
-              <div className="p-6">
-                <p className="text-muted-foreground mb-4">Get started with Aqyn in minutes:</p>
-                <CodeBlock
-                  code={`# Clone the repository
+      <section className="container mx-auto px-4 py-16">
+        <div className="max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Quick Start Column */}
+            <div>
+              <h2 className="text-3xl font-bold mb-8">Quick Start</h2>
+              <Card className="backdrop-blur-sm bg-card/50">
+                <div className="p-6">
+                  <p className="text-muted-foreground mb-4">Get started with Aqyn in minutes:</p>
+                  <CodeBlock
+                    code={`# Clone the repository
 git clone https://github.com/your-org/aqyn.git
 cd aqyn
 
 # Start all services
 docker compose up -d`}
-                  language="bash"
-                />
-              </div>
-            </Card>
-          </div>
+                    language="bash"
+                  />
+                </div>
+              </Card>
+            </div>
 
-          {/* Chat Column */}
-          <div>
-            <h2 className="text-3xl font-bold mb-8">Try it Now</h2>
-            <Card className="backdrop-blur-sm bg-card/50">
-              <div className="h-[500px] flex flex-col">
-                <ScrollArea className="flex-1 p-4">
-                  {messages.map((msg) => (
-                    <div
-                      key={msg.id}
-                      className={`mb-4 ${
-                        msg.role === "user" ? "text-right" : "text-left"
-                      }`}
-                    >
+            {/* Chat Column */}
+            <div>
+              <h2 className="text-3xl font-bold mb-8">Try it Now</h2>
+              <Card className="backdrop-blur-sm bg-card/50">
+                <div className="h-[500px] flex flex-col">
+                  <ScrollArea className="flex-1 p-4">
+                    {messages.map((msg) => (
                       <div
-                        className={`inline-block p-3 rounded-lg ${
-                          msg.role === "user"
-                            ? "bg-primary text-primary-foreground"
-                            : "bg-muted"
+                        key={msg.id}
+                        className={`mb-4 ${
+                          msg.role === "user" ? "text-right" : "text-left"
                         }`}
                       >
-                        {msg.content}
+                        <div
+                          className={`inline-block p-3 rounded-lg ${
+                            msg.role === "user"
+                              ? "bg-primary text-primary-foreground"
+                              : "bg-muted"
+                          }`}
+                        >
+                          {msg.content}
+                        </div>
                       </div>
+                    ))}
+                  </ScrollArea>
+                  <form onSubmit={handleSubmit} className="p-4 border-t">
+                    <div className="flex gap-2">
+                      <Textarea
+                        ref={chatInputRef}
+                        value={input}
+                        onChange={(e) => setInput(e.target.value)}
+                        placeholder="Ask about the framework..."
+                        className="min-h-[60px]"
+                      />
+                      <Button type="submit" className="self-end">
+                        <Send className="h-4 w-4" />
+                      </Button>
                     </div>
-                  ))}
-                </ScrollArea>
-                <form onSubmit={handleSubmit} className="p-4 border-t">
-                  <div className="flex gap-2">
-                    <Textarea
-                      ref={chatInputRef}
-                      value={input}
-                      onChange={(e) => setInput(e.target.value)}
-                      placeholder="Ask about the framework..."
-                      className="min-h-[60px]"
-                    />
-                    <Button type="submit" className="self-end">
-                      <Send className="h-4 w-4" />
-                    </Button>
-                  </div>
-                </form>
-              </div>
-            </Card>
+                  </form>
+                </div>
+              </Card>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Feature Cards */}
-      <section className="container px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="p-6 rounded-lg bg-card">
+      <section className="container mx-auto px-4 py-16">
+        <div className="max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="p-6 rounded-lg bg-card">
               <h3 className="text-xl font-semibold mb-3">AI-Powered Search</h3>
               <p className="text-muted-foreground">
                 Intelligent search capabilities powered by state-of-the-art language models
@@ -258,12 +261,13 @@ docker compose up -d`}
                 Simple APIs and SDKs for seamless integration with your existing stack
               </p>
             </div>
+          </div>
         </div>
       </section>
 
       {/* Technical FAQ Section */}
-      <section className="container px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 gap-8">
+      <section className="container mx-auto px-4 py-16">
+        <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl font-bold text-center mb-12">Technical FAQ</h2>
           <div className="w-full">
             <Accordion type="single" collapsible className="w-full">
@@ -289,7 +293,7 @@ docker compose up -d`}
         </div>
       </section>
 
-      {/* Technology Stack Section */}
+      {/* Technology Stack Section - This one is already well aligned */}
       <section className="py-24 bg-muted/30">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-16">Technology Stack</h2>
@@ -317,24 +321,22 @@ docker compose up -d`}
       </section>
 
       {/* Community Section */}
-      <section className="container px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 gap-8">
-          <div className="text-center">
-            <h2 className="text-3xl font-bold mb-8">Join Our Community</h2>
-            <div className="flex flex-wrap gap-6 justify-center">
-              <Button variant="outline" size="lg">
-                <SiGithub className="mr-2 h-5 w-5" />
-                GitHub
-              </Button>
-              <Button variant="outline" size="lg">
-                <SiDiscord className="mr-2 h-5 w-5" />
-                Discord
-              </Button>
-              <Button variant="outline" size="lg">
-                <SiYoutube className="mr-2 h-5 w-5" />
-                YouTube
-              </Button>
-            </div>
+      <section className="container mx-auto px-4 py-16">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-3xl font-bold mb-8">Join Our Community</h2>
+          <div className="flex flex-wrap gap-6 justify-center">
+            <Button variant="outline" size="lg">
+              <SiGithub className="mr-2 h-5 w-5" />
+              GitHub
+            </Button>
+            <Button variant="outline" size="lg">
+              <SiDiscord className="mr-2 h-5 w-5" />
+              Discord
+            </Button>
+            <Button variant="outline" size="lg">
+              <SiYoutube className="mr-2 h-5 w-5" />
+              YouTube
+            </Button>
           </div>
         </div>
       </section>
