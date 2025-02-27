@@ -5,6 +5,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Send } from "lucide-react";
 import { SiGithub, SiDiscord, SiYoutube, SiTypescript, SiReact, SiTailwindcss, SiOpenai } from "react-icons/si";
+import { CodeBlock } from "@/components/ui/code-block";
 import {
   Accordion,
   AccordionContent,
@@ -21,11 +22,28 @@ const INITIAL_MESSAGES = [
   },
 ];
 
-// FAQ Data
+// Updated FAQ_ITEMS with code examples
 const FAQ_ITEMS = [
   {
     question: "What is RAG and how does it work?",
-    answer: "RAG (Retrieval Augmented Generation) combines document retrieval with language model generation. It first retrieves relevant information from a knowledge base, then uses this context to generate accurate responses."
+    answer: "RAG (Retrieval Augmented Generation) combines document retrieval with language model generation. It first retrieves relevant information from a knowledge base, then uses this context to generate accurate responses. Here's a basic example:",
+    code: `// Initialize RAG components
+const documentStore = new VectorStore();
+const embeddings = new Embeddings();
+const llm = new LanguageModel();
+
+async function queryWithRAG(query: string) {
+  // 1. Convert query to embedding
+  const queryEmbedding = await embeddings.embed(query);
+
+  // 2. Retrieve relevant documents
+  const relevantDocs = await documentStore.search(queryEmbedding);
+
+  // 3. Generate response using context
+  const response = await llm.generate(query, relevantDocs);
+
+  return response;
+}`
   },
   {
     question: "What types of documents can be processed?",
@@ -62,6 +80,26 @@ const FAQ_ITEMS = [
   {
     question: "Can I deploy this in production?",
     answer: "Yes, our framework is production-ready with support for high availability, monitoring, and scaling."
+  },
+  {
+    question: "How do I integrate Aqyn with my application?",
+    answer: "Integration is straightforward with our SDK. Here's a quick example:",
+    code: `import { AqynClient } from '@aqyn/sdk';
+
+// Initialize the client
+const aqyn = new AqynClient({
+  apiKey: process.env.AQYN_API_KEY,
+  embeddingModel: 'openai',
+  storageType: 'local'
+});
+
+// Index your documents
+await aqyn.addDocuments([
+  { content: 'Your document text here', metadata: { source: 'docs' } }
+]);
+
+// Query the knowledge base
+const response = await aqyn.query('How does feature X work?');`
   }
 ];
 
@@ -212,7 +250,14 @@ export default function Home() {
                   {item.question}
                 </AccordionTrigger>
                 <AccordionContent>
-                  {item.answer}
+                  <p className="mb-4">{item.answer}</p>
+                  {item.code && (
+                    <CodeBlock
+                      code={item.code}
+                      language="typescript"
+                      className="mt-4"
+                    />
+                  )}
                 </AccordionContent>
               </AccordionItem>
             ))}
