@@ -144,9 +144,9 @@ export default function Home() {
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-3xl" />
         </div>
 
-        <section className="container pt-8 pb-16">
+        <section className="container pt-8 pb-16 px-4 sm:px-6 lg:px-8">
           {/* Logo with margin */}
-          <div className="flex items-center mb-16 px-4">
+          <div className="flex items-center mb-16">
             <div className="flex items-center gap-2 text-2xl font-bold">
               <div className="size-8 rounded bg-primary"></div>
               Aqyn
@@ -172,9 +172,9 @@ export default function Home() {
       </div>
 
       {/* Quick Start and Chat Sections in Two Columns */}
-      <section className="container py-16">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          <div className="lg:col-span-10 lg:col-start-2">
+      <section className="container px-4 sm:px-6 lg:px-8 py-16">
+        <div className="grid grid-cols-4 md:grid-cols-8 lg:grid-cols-12 gap-8">
+          <div className="col-span-4 md:col-span-8 lg:col-span-10 lg:col-start-2">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               {/* Quick Start Column */}
               <div className="lg:col-span-1">
@@ -243,9 +243,9 @@ docker compose up -d`}
       </section>
 
       {/* Feature Cards */}
-      <section className="container py-16">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          <div className="lg:col-span-10 lg:col-start-2">
+      <section className="container px-4 sm:px-6 lg:px-8 py-16">
+        <div className="grid grid-cols-4 md:grid-cols-8 lg:grid-cols-12 gap-8">
+          <div className="col-span-4 md:col-span-8 lg:col-span-10 lg:col-start-2">
             <h2 className="text-3xl font-bold text-center mb-12">Key Features</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <Card className="p-6 backdrop-blur-sm bg-card/50">
@@ -272,9 +272,9 @@ docker compose up -d`}
       </section>
 
       {/* Technical FAQ Section */}
-      <section className="container py-16">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          <div className="lg:col-span-8 lg:col-start-3">
+      <section className="container px-4 sm:px-6 lg:px-8 py-16">
+        <div className="grid grid-cols-4 md:grid-cols-8 lg:grid-cols-12 gap-8">
+          <div className="col-span-4 md:col-span-6 md:col-start-2 lg:col-span-8 lg:col-start-3">
             <h2 className="text-3xl font-bold text-center mb-12">Technical FAQ</h2>
             <div className="w-full">
               <Accordion type="single" collapsible className="w-full">
@@ -302,9 +302,9 @@ docker compose up -d`}
       </section>
 
       {/* Technology Stack Section */}
-      <section className="container py-16 bg-muted/30">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          <div className="lg:col-span-8 lg:col-start-3">
+      <section className="container px-4 sm:px-6 lg:px-8 py-16 bg-muted/30">
+        <div className="grid grid-cols-4 md:grid-cols-8 lg:grid-cols-12 gap-8">
+          <div className="col-span-4 md:col-span-6 md:col-start-2 lg:col-span-8 lg:col-start-3">
             <h2 className="text-3xl font-bold text-center mb-12">Technology Stack</h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-primary">
               <div className="flex flex-col items-center gap-2">
@@ -329,11 +329,11 @@ docker compose up -d`}
       </section>
 
       {/* Community Section */}
-      <section className="container py-16">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          <div className="lg:col-span-8 lg:col-start-3 text-center">
+      <section className="container px-4 sm:px-6 lg:px-8 py-16">
+        <div className="grid grid-cols-4 md:grid-cols-8 lg:grid-cols-12 gap-8">
+          <div className="col-span-4 md:col-span-6 md:col-start-2 lg:col-span-8 lg:col-start-3 text-center">
             <h2 className="text-3xl font-bold mb-8">Join Our Community</h2>
-            <div className="flex gap-6 justify-center">
+            <div className="flex flex-wrap gap-6 justify-center">
               <Button variant="outline" size="lg">
                 <SiGithub className="mr-2 h-5 w-5" />
                 GitHub
