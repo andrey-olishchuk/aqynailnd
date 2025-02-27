@@ -135,192 +135,180 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Hero Section with Graphical Elements */}
-      <div className="relative overflow-hidden">
-        {/* Decorative elements */}
+      {/* Hero Section */}
+      <section className="relative overflow-hidden">
+        {/* Background Effects */}
         <div className="absolute inset-0 -z-10">
           <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/10 rounded-full blur-3xl" />
           <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl" />
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-3xl" />
         </div>
 
-        <section className="container pt-8 pb-16 px-4 sm:px-6 lg:px-8">
-          {/* Logo with margin */}
-          <div className="flex items-center mb-16">
+        <div className="container mx-auto px-4 py-24">
+          {/* Logo */}
+          <div className="flex items-center justify-center mb-16">
             <div className="flex items-center gap-2 text-2xl font-bold">
               <div className="size-8 rounded bg-primary"></div>
               Aqyn
             </div>
           </div>
 
-          <div className="text-center max-w-3xl mx-auto relative">
+          {/* Hero Content */}
+          <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-5xl font-bold tracking-tight mb-6">
               Build AI-powered Applications
             </h1>
             <p className="text-xl text-muted-foreground mb-8">
-              A framework for building self-hosted Retrieval-Augmented Generation (RAG) applications with preconfigured, production-ready components like LangFlow, Dagster, and Qdrant.
-              Install your own Aqyn instance today.
+              A framework for building self-hosted Retrieval-Augmented Generation (RAG) applications 
+              with preconfigured, production-ready components.
             </p>
             <div className="flex gap-4 justify-center">
-              <Button size="lg" onClick={focusChat}>Ask our Aqyn</Button>
-              <Button size="lg" variant="outline">
-                View on GitHub
-              </Button>
+              <Button size="lg">Get Started</Button>
+              <Button size="lg" variant="outline">View on GitHub</Button>
             </div>
           </div>
-        </section>
-      </div>
+        </div>
+      </section>
 
       {/* Quick Start and Chat Sections in Two Columns */}
       <section className="container px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-4 md:grid-cols-8 lg:grid-cols-12 gap-8">
-          <div className="col-span-4 md:col-span-8 lg:col-span-8 lg:col-start-3">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              {/* Quick Start Column */}
-              <div className="lg:col-span-1">
-                <h2 className="text-3xl font-bold mb-8">Quick Start</h2>
-                <Card className="backdrop-blur-sm bg-card/50">
-                  <div className="p-6">
-                    <p className="text-muted-foreground mb-4">Get started with Aqyn in minutes:</p>
-                    <CodeBlock
-                      code={`# Clone the repository
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {/* Quick Start Column */}
+          <div>
+            <h2 className="text-3xl font-bold mb-8">Quick Start</h2>
+            <Card className="backdrop-blur-sm bg-card/50">
+              <div className="p-6">
+                <p className="text-muted-foreground mb-4">Get started with Aqyn in minutes:</p>
+                <CodeBlock
+                  code={`# Clone the repository
 git clone https://github.com/your-org/aqyn.git
 cd aqyn
 
 # Start all services
 docker compose up -d`}
-                      language="bash"
-                    />
-                  </div>
-                </Card>
+                  language="bash"
+                />
               </div>
+            </Card>
+          </div>
 
-              {/* Chat Column */}
-              <div className="lg:col-span-1">
-                <h2 className="text-3xl font-bold mb-8">Try it Now</h2>
-                <Card className="backdrop-blur-sm bg-card/50">
-                  <div className="h-[500px] flex flex-col">
-                    <ScrollArea className="flex-1 p-4">
-                      {messages.map((msg) => (
-                        <div
-                          key={msg.id}
-                          className={`mb-4 ${
-                            msg.role === "user" ? "text-right" : "text-left"
-                          }`}
-                        >
-                          <div
-                            className={`inline-block p-3 rounded-lg ${
-                              msg.role === "user"
-                                ? "bg-primary text-primary-foreground"
-                                : "bg-muted"
-                            }`}
-                          >
-                            {msg.content}
-                          </div>
-                        </div>
-                      ))}
-                    </ScrollArea>
-                    <form onSubmit={handleSubmit} className="p-4 border-t">
-                      <div className="flex gap-2">
-                        <Textarea
-                          ref={chatInputRef}
-                          value={input}
-                          onChange={(e) => setInput(e.target.value)}
-                          placeholder="Ask about the framework..."
-                          className="min-h-[60px]"
-                        />
-                        <Button type="submit" className="self-end">
-                          <Send className="h-4 w-4" />
-                        </Button>
+          {/* Chat Column */}
+          <div>
+            <h2 className="text-3xl font-bold mb-8">Try it Now</h2>
+            <Card className="backdrop-blur-sm bg-card/50">
+              <div className="h-[500px] flex flex-col">
+                <ScrollArea className="flex-1 p-4">
+                  {messages.map((msg) => (
+                    <div
+                      key={msg.id}
+                      className={`mb-4 ${
+                        msg.role === "user" ? "text-right" : "text-left"
+                      }`}
+                    >
+                      <div
+                        className={`inline-block p-3 rounded-lg ${
+                          msg.role === "user"
+                            ? "bg-primary text-primary-foreground"
+                            : "bg-muted"
+                        }`}
+                      >
+                        {msg.content}
                       </div>
-                    </form>
+                    </div>
+                  ))}
+                </ScrollArea>
+                <form onSubmit={handleSubmit} className="p-4 border-t">
+                  <div className="flex gap-2">
+                    <Textarea
+                      ref={chatInputRef}
+                      value={input}
+                      onChange={(e) => setInput(e.target.value)}
+                      placeholder="Ask about the framework..."
+                      className="min-h-[60px]"
+                    />
+                    <Button type="submit" className="self-end">
+                      <Send className="h-4 w-4" />
+                    </Button>
                   </div>
-                </Card>
+                </form>
               </div>
-            </div>
+            </Card>
           </div>
         </div>
       </section>
 
       {/* Feature Cards */}
       <section className="container px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-4 md:grid-cols-8 lg:grid-cols-12 gap-8">
-          <div className="col-span-4 md:col-span-8 lg:col-span-8 lg:col-start-3">
-            <h2 className="text-3xl font-bold text-center mb-12">Key Features</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <Card className="p-6 backdrop-blur-sm bg-card/50">
-                <h3 className="text-xl font-semibold mb-3">AI-Powered Search</h3>
-                <p className="text-muted-foreground">
-                  Intelligent search capabilities powered by state-of-the-art language models
-                </p>
-              </Card>
-              <Card className="p-6 backdrop-blur-sm bg-card/50">
-                <h3 className="text-xl font-semibold mb-3">RAG Framework</h3>
-                <p className="text-muted-foreground">
-                  Retrieval Augmented Generation for accurate and contextual responses
-                </p>
-              </Card>
-              <Card className="p-6 backdrop-blur-sm bg-card/50">
-                <h3 className="text-xl font-semibold mb-3">Easy Integration</h3>
-                <p className="text-muted-foreground">
-                  Simple APIs and SDKs for seamless integration with your existing stack
-                </p>
-              </Card>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="p-6 rounded-lg bg-card">
+              <h3 className="text-xl font-semibold mb-3">AI-Powered Search</h3>
+              <p className="text-muted-foreground">
+                Intelligent search capabilities powered by state-of-the-art language models
+              </p>
             </div>
-          </div>
+            <div className="p-6 rounded-lg bg-card">
+              <h3 className="text-xl font-semibold mb-3">RAG Framework</h3>
+              <p className="text-muted-foreground">
+                Retrieval Augmented Generation for accurate and contextual responses
+              </p>
+            </div>
+            <div className="p-6 rounded-lg bg-card">
+              <h3 className="text-xl font-semibold mb-3">Easy Integration</h3>
+              <p className="text-muted-foreground">
+                Simple APIs and SDKs for seamless integration with your existing stack
+              </p>
+            </div>
         </div>
       </section>
 
       {/* Technical FAQ Section */}
       <section className="container px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-4 md:grid-cols-8 lg:grid-cols-12 gap-8">
-          <div className="col-span-4 md:col-span-8 lg:col-span-8 lg:col-start-3">
-            <h2 className="text-3xl font-bold text-center mb-12">Technical FAQ</h2>
-            <div className="w-full">
-              <Accordion type="single" collapsible className="w-full">
-                {FAQ_ITEMS.map((item, index) => (
-                  <AccordionItem key={index} value={`item-${index}`}>
-                    <AccordionTrigger className="text-left">
-                      {item.question}
-                    </AccordionTrigger>
-                    <AccordionContent>
-                      <p className="mb-4">{item.answer}</p>
-                      {item.code && (
-                        <CodeBlock
-                          code={item.code}
-                          language="typescript"
-                          className="mt-4"
-                        />
-                      )}
-                    </AccordionContent>
-                  </AccordionItem>
-                ))}
-              </Accordion>
-            </div>
+        <div className="grid grid-cols-1 gap-8">
+          <h2 className="text-3xl font-bold text-center mb-12">Technical FAQ</h2>
+          <div className="w-full">
+            <Accordion type="single" collapsible className="w-full">
+              {FAQ_ITEMS.map((item, index) => (
+                <AccordionItem key={index} value={`item-${index}`}>
+                  <AccordionTrigger className="text-left">
+                    {item.question}
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <p className="mb-4">{item.answer}</p>
+                    {item.code && (
+                      <CodeBlock
+                        code={item.code}
+                        language="typescript"
+                        className="mt-4"
+                      />
+                    )}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
           </div>
         </div>
       </section>
 
       {/* Technology Stack Section */}
-      <section className="container px-4 sm:px-6 lg:px-8 py-16 bg-muted/30">
-        <div className="grid grid-cols-4 md:grid-cols-8 lg:grid-cols-12 gap-8">
-          <div className="col-span-4 md:col-span-8 lg:col-span-8 lg:col-start-3">
-            <h2 className="text-3xl font-bold text-center mb-12">Technology Stack</h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-primary">
-              <div className="flex flex-col items-center gap-2">
-                <SiTypescript className="w-12 h-12" />
+      <section className="py-24 bg-muted/30">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-16">Technology Stack</h2>
+          <div className="max-w-4xl mx-auto">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-12 place-items-center text-primary">
+              <div className="flex flex-col items-center gap-3">
+                <SiTypescript className="w-12 h-12 transition-transform hover:scale-110" />
                 <span>TypeScript</span>
               </div>
-              <div className="flex flex-col items-center gap-2">
-                <SiReact className="w-12 h-12" />
+              <div className="flex flex-col items-center gap-3">
+                <SiReact className="w-12 h-12 transition-transform hover:scale-110" />
                 <span>React</span>
               </div>
-              <div className="flex flex-col items-center gap-2">
-                <SiTailwindcss className="w-12 h-12" />
+              <div className="flex flex-col items-center gap-3">
+                <SiTailwindcss className="w-12 h-12 transition-transform hover:scale-110" />
                 <span>Tailwind</span>
               </div>
-              <div className="flex flex-col items-center gap-2">
-                <SiOpenai className="w-12 h-12" />
+              <div className="flex flex-col items-center gap-3">
+                <SiOpenai className="w-12 h-12 transition-transform hover:scale-110" />
                 <span>OpenAI</span>
               </div>
             </div>
@@ -330,8 +318,8 @@ docker compose up -d`}
 
       {/* Community Section */}
       <section className="container px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-4 md:grid-cols-8 lg:grid-cols-12 gap-8">
-          <div className="col-span-4 md:col-span-8 lg:col-span-8 lg:col-start-3 text-center">
+        <div className="grid grid-cols-1 gap-8">
+          <div className="text-center">
             <h2 className="text-3xl font-bold mb-8">Join Our Community</h2>
             <div className="flex flex-wrap gap-6 justify-center">
               <Button variant="outline" size="lg">
