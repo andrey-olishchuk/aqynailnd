@@ -4,15 +4,65 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Send } from "lucide-react";
-import { SiGithub, SiDiscord, SiYoutube } from "react-icons/si";
+import { SiGithub, SiDiscord, SiYoutube, SiTypescript, SiReact, SiTailwindcss, SiOpenai } from "react-icons/si";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 // Simulated chat messages
 const INITIAL_MESSAGES = [
   {
     id: 1,
     role: "assistant",
-    content: "Hello! I'm your AI assistant. How can I help you understand our documentation?",
+    content: "Hello! I'm your AI assistant. How can I help you understand our framework?",
   },
+];
+
+// FAQ Data
+const FAQ_ITEMS = [
+  {
+    question: "What is RAG and how does it work?",
+    answer: "RAG (Retrieval Augmented Generation) combines document retrieval with language model generation. It first retrieves relevant information from a knowledge base, then uses this context to generate accurate responses."
+  },
+  {
+    question: "What types of documents can be processed?",
+    answer: "Our framework supports various document formats including PDF, DOCX, Markdown, and plain text files. We also support code snippets and technical documentation."
+  },
+  {
+    question: "How is the data stored and secured?",
+    answer: "Documents are processed and stored using industry-standard encryption. We use vector databases for efficient retrieval and support both cloud and on-premise deployments."
+  },
+  {
+    question: "What language models are supported?",
+    answer: "We support integration with major language models including GPT-4, Claude, and open-source models like Llama 2 and Mistral."
+  },
+  {
+    question: "Can I customize the RAG pipeline?",
+    answer: "Yes, our framework is highly customizable. You can modify document processing, embedding generation, and retrieval strategies."
+  },
+  {
+    question: "What's the typical response time?",
+    answer: "Response times typically range from 0.5-2 seconds, depending on document complexity and chosen language model."
+  },
+  {
+    question: "How does context window management work?",
+    answer: "We use dynamic context window management to optimize token usage while maintaining response quality."
+  },
+  {
+    question: "Is there support for multiple languages?",
+    answer: "Yes, our framework supports multilingual document processing and generation in over 100 languages."
+  },
+  {
+    question: "What about API rate limiting and quotas?",
+    answer: "We provide configurable rate limiting and usage monitoring to help manage API costs and quotas."
+  },
+  {
+    question: "Can I deploy this in production?",
+    answer: "Yes, our framework is production-ready with support for high availability, monitoring, and scaling."
+  }
 ];
 
 export default function Home() {
@@ -23,14 +73,12 @@ export default function Home() {
     e.preventDefault();
     if (!input.trim()) return;
 
-    // Add user message
     const userMessage = {
       id: messages.length + 1,
       role: "user",
       content: input,
     };
 
-    // Simulate AI response
     const aiResponse = {
       id: messages.length + 2,
       role: "assistant",
@@ -43,27 +91,44 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Hero Section */}
-      <section className="container pt-20 pb-16">
-        <div className="text-center max-w-3xl mx-auto">
-          <h1 className="text-5xl font-bold tracking-tight mb-6">
-            Build AI-powered Applications
-          </h1>
-          <p className="text-xl text-muted-foreground mb-8">
-            A modern framework for building AI applications with RAG capabilities
-          </p>
-          <div className="flex gap-4 justify-center">
-            <Button size="lg">Get Started</Button>
-            <Button size="lg" variant="outline">
-              View on GitHub
-            </Button>
-          </div>
+      {/* Hero Section with Graphical Elements */}
+      <div className="relative overflow-hidden">
+        {/* Decorative elements */}
+        <div className="absolute inset-0 -z-10">
+          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/10 rounded-full blur-3xl" />
+          <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-3xl" />
         </div>
-      </section>
+
+        <section className="container pt-8 pb-16">
+          {/* Logo with margin */}
+          <div className="flex items-center mb-16 px-4">
+            <div className="flex items-center gap-2 text-2xl font-bold">
+              <div className="size-8 rounded bg-primary"></div>
+              RAGStack
+            </div>
+          </div>
+
+          <div className="text-center max-w-3xl mx-auto relative">
+            <h1 className="text-5xl font-bold tracking-tight mb-6">
+              Build AI-powered Applications
+            </h1>
+            <p className="text-xl text-muted-foreground mb-8">
+              A modern framework for building AI applications with RAG capabilities
+            </p>
+            <div className="flex gap-4 justify-center">
+              <Button size="lg">Get Started</Button>
+              <Button size="lg" variant="outline">
+                View on GitHub
+              </Button>
+            </div>
+          </div>
+        </section>
+      </div>
 
       {/* Chat Section */}
-      <section className="container py-16 bg-muted/30">
-        <Card className="max-w-2xl mx-auto">
+      <section className="container py-16">
+        <Card className="max-w-2xl mx-auto backdrop-blur-sm bg-card/50">
           <div className="h-[500px] flex flex-col">
             <ScrollArea className="flex-1 p-4">
               {messages.map((msg) => (
@@ -90,7 +155,7 @@ export default function Home() {
                 <Textarea
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
-                  placeholder="Ask about the documentation..."
+                  placeholder="Ask about the framework..."
                   className="min-h-[60px]"
                 />
                 <Button type="submit" className="self-end">
@@ -102,23 +167,23 @@ export default function Home() {
         </Card>
       </section>
 
-      {/* Documentation Section */}
+      {/* Feature Cards */}
       <section className="container py-16">
         <h2 className="text-3xl font-bold text-center mb-12">Key Features</h2>
         <div className="grid md:grid-cols-3 gap-8">
-          <Card className="p-6">
+          <Card className="p-6 backdrop-blur-sm bg-card/50">
             <h3 className="text-xl font-semibold mb-3">AI-Powered Search</h3>
             <p className="text-muted-foreground">
               Intelligent search capabilities powered by state-of-the-art language models
             </p>
           </Card>
-          <Card className="p-6">
+          <Card className="p-6 backdrop-blur-sm bg-card/50">
             <h3 className="text-xl font-semibold mb-3">RAG Framework</h3>
             <p className="text-muted-foreground">
               Retrieval Augmented Generation for accurate and contextual responses
             </p>
           </Card>
-          <Card className="p-6">
+          <Card className="p-6 backdrop-blur-sm bg-card/50">
             <h3 className="text-xl font-semibold mb-3">Easy Integration</h3>
             <p className="text-muted-foreground">
               Simple APIs and SDKs for seamless integration with your existing stack
@@ -127,15 +192,45 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Logo Section */}
+      {/* Technical FAQ Section */}
+      <section className="container py-16">
+        <h2 className="text-3xl font-bold text-center mb-12">Technical FAQ</h2>
+        <div className="max-w-3xl mx-auto">
+          <Accordion type="single" collapsible className="w-full">
+            {FAQ_ITEMS.map((item, index) => (
+              <AccordionItem key={index} value={`item-${index}`}>
+                <AccordionTrigger className="text-left">
+                  {item.question}
+                </AccordionTrigger>
+                <AccordionContent>
+                  {item.answer}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
+      </section>
+
+      {/* Technology Stack Section */}
       <section className="container py-16 bg-muted/30">
-        <h2 className="text-3xl font-bold text-center mb-12">Trusted By</h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 opacity-70">
-          {[1, 2, 3, 4].map((i) => (
-            <div key={i} className="flex items-center justify-center">
-              <div className="w-32 h-16 bg-foreground/10 rounded-lg" />
-            </div>
-          ))}
+        <h2 className="text-3xl font-bold text-center mb-12">Technology Stack</h2>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-3xl mx-auto text-primary">
+          <div className="flex flex-col items-center gap-2">
+            <SiTypescript className="w-12 h-12" />
+            <span>TypeScript</span>
+          </div>
+          <div className="flex flex-col items-center gap-2">
+            <SiReact className="w-12 h-12" />
+            <span>React</span>
+          </div>
+          <div className="flex flex-col items-center gap-2">
+            <SiTailwindcss className="w-12 h-12" />
+            <span>Tailwind</span>
+          </div>
+          <div className="flex flex-col items-center gap-2">
+            <SiOpenai className="w-12 h-12" />
+            <span>OpenAI</span>
+          </div>
         </div>
       </section>
 
