@@ -246,8 +246,14 @@ export default function Home() {
               Qdrant vector store, MinIO object storage, and Dagster data pipelines.
             </p>
             <div className="flex gap-4 justify-center">
-              <Button size="lg">Ask Aqyn</Button>
-              <Button size="lg" variant="outline">View on GitHub</Button>
+              <Button size="lg" onClick={() => focusChat()}>Ask Aqyn</Button>
+              <a 
+                href="https://github.com/vossmoos/aqynai" 
+                target="_blank" 
+                rel="noopener noreferrer"
+              >
+                <Button size="lg" variant="outline">View on GitHub</Button>
+              </a>
             </div>
           </div>
         </div>
