@@ -1,0 +1,14 @@
+# Development files
+.git
+.gitignore
+README.md
+client/
+server/
+node_modules/
+*.log
+
+# Editor directories and files
+.vscode/
+.idea/
+*.swp
+*.swo
