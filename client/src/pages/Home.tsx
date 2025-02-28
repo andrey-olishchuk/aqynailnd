@@ -113,7 +113,15 @@ const INITIAL_MESSAGES = [
 const FAQ_ITEMS = [
   {
     question: "What is RAG and how does it work?",
-    answer: "RAG (Retrieval Augmented Generation) enhances LLM responses by retrieving relevant context from your knowledge base. It processes documents into embeddings for semantic search, then uses matched content to generate contextually accurate responses.",
+    answer: "RAG (Retrieval Augmented Generation) enhances LLM responses by retrieving relevant context from your knowledge base. While LLMs excel at general knowledge, they lack understanding of your company's specific context, internal documentation, and proprietary information. RAG bridges this gap by automatically retrieving and injecting relevant internal context into the LLM's prompt, enabling accurate responses about your specific use cases, products, and documentation.",
+  },
+  {
+    question: "Which data could be used as a knowledge base?",
+    answer: "Aqyn supports a wide range of knowledge sources including technical documentation, code repositories, API specs, architectural diagrams, and internal wikis. Our document processors handle PDF, Markdown, HTML, JSON, YAML, and various programming language files with proper syntax parsing.",
+  },
+  {
+    question: "How to integrate Aqyn to a website?",
+    answer: "Integration is straightforward via our REST API or TypeScript/Python SDKs. The framework can be deployed as a microservice in your infrastructure.",
     code: `<!-- Add Aqyn Chat to your website -->
 <div id="aqyn-chat">
   <textarea id="aqyn-input" placeholder="Ask a question..."></textarea>
@@ -129,31 +137,6 @@ const FAQ_ITEMS = [
     placeholder: 'Ask about our documentation...'
   });
 </script>`
-  },
-  {
-    question: "Which data could be used as a knowledge base?",
-    answer: "Aqyn supports a wide range of knowledge sources including technical documentation, code repositories, API specs, architectural diagrams, and internal wikis. Our document processors handle PDF, Markdown, HTML, JSON, YAML, and various programming language files with proper syntax parsing.",
-  },
-  {
-    question: "How to integrate Aqyn to a website?",
-    answer: "Integration is straightforward via our REST API or TypeScript/Python SDKs. The framework can be deployed as a microservice in your infrastructure.",
-    code: `// TypeScript SDK Integration
-import { AqynClient } from '@aqyn/sdk';
-
-const aqyn = new AqynClient({
-  endpoint: process.env.AQYN_API_ENDPOINT,
-  apiKey: process.env.AQYN_API_KEY
-});
-
-// React Hook Example
-function useAqynQuery(question: string) {
-  return useQuery({
-    queryKey: ['aqyn', question],
-    queryFn: () => aqyn.query(question),
-    enabled: !!question
-  });
-}
-`
   },
   {
     question: "How to customize Aqyn pipelines?",
