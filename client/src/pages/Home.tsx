@@ -140,23 +140,50 @@ const FAQ_ITEMS = [
   },
   {
     question: "How to customize Aqyn pipelines?",
-    answer: "Aqyn offers two types of customizable pipelines: Data Loader pipelines built with Dagster for document processing and embedding generation, and User Flow pipelines designed in LangFlow for query handling. This separation allows for optimized batch processing of documents while maintaining responsive user interactions.",
-    code: `// Dagster Data Loader Pipeline Example
-@pipeline
-def document_processing():
-    documents = load_documents()
-    processed = process_documents(documents)
-    embeddings = generate_embeddings(processed)
-    store_vectors(embeddings)
+    answer: "Aqyn leverages Dagster for building data processing pipelines. Here's a basic example of a pipeline that reads text files from a '/data' directory and removes email addresses from the content - demonstrating how you can process your documents before generating embeddings:",
+    code: `# Basic Dagster pipeline example
+from dagster import asset, AssetIn, Output
+import os
+import re
 
-# LangFlow User Query Pipeline
-user_pipeline = Pipeline.from_langflow(
-    "query_pipeline.json",
-    custom_nodes=[
-        DocumentRetriever,
-        ResponseGenerator
-    ]
-)`
+@asset
+def list_data_files():
+    """List all files in the data directory."""
+    files = [f for f in os.listdir("/data") if f.endswith(".txt")]
+    return Output(files, metadata={"file_count": len(files)})
+
+@asset(ins={"files": AssetIn("list_data_files")})
+def remove_emails_from_files(files):
+    """Remove email addresses from text files."""
+    email_pattern = r'[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}'
+    processed_files = []
+
+    for filename in files:
+        with open(f"/data/{filename}", 'r') as f:
+            content = f.read()
+            # Remove email addresses
+            cleaned_content = re.sub(email_pattern, '[EMAIL REMOVED]', content)
+            # Save processed content
+            output_path = f"/data/processed/{filename}"
+            os.makedirs(os.path.dirname(output_path), exist_ok=True)
+            with open(output_path, 'w') as out_f:
+                out_f.write(cleaned_content)
+            processed_files.append(output_path)
+
+    return Output(
+        processed_files,
+        metadata={
+            "processed_count": len(processed_files),
+            "output_dir": "/data/processed"
+        }
+    )
+
+# Define the job that includes both assets
+from dagster import define_asset_job
+process_files_job = define_asset_job(
+    name="process_files",
+    selection=["list_data_files", "remove_emails_from_files"]
+)`,
   },
   {
     question: "Does it support multilanguage?",
@@ -352,7 +379,7 @@ docker compose up -d`}
                     {item.code && (
                       <CodeBlock
                         code={item.code}
-                        language="html"
+                        language={item.question === "How to integrate Aqyn to a website?" ? "html" : "python"}
                         className="mt-4"
                       />
                     )}
