@@ -113,80 +113,83 @@ const INITIAL_MESSAGES = [
 const FAQ_ITEMS = [
   {
     question: "What is RAG and how does it work?",
-    answer: "RAG (Retrieval Augmented Generation) combines document retrieval with language model generation. It first retrieves relevant information from a knowledge base, then uses this context to generate accurate responses. Here's a basic example:",
-    code: `// Initialize RAG components
-const documentStore = new VectorStore();
-const embeddings = new Embeddings();
-const llm = new LanguageModel();
+    answer: "RAG (Retrieval Augmented Generation) enhances LLM responses by retrieving relevant context from your knowledge base. It processes documents into embeddings for semantic search, then uses matched content to generate contextually accurate responses.",
+    code: `// Example RAG Pipeline in Aqyn
+const pipeline = new AqynPipeline({
+  documentProcessor: new DocumentProcessor(),
+  embeddingModel: "openai",
+  vectorStore: new QdrantStore(),
+  llm: new OpenAIChat()
+});
 
-async function queryWithRAG(query: string) {
-  // 1. Convert query to embedding
-  const queryEmbedding = await embeddings.embed(query);
+// 1. Process and index documents
+await pipeline.indexDocuments(documents);
 
-  // 2. Retrieve relevant documents
-  const relevantDocs = await documentStore.search(queryEmbedding);
+// 2. Query with RAG
+const response = await pipeline.query({
+  question: "How to implement feature X?",
+  // Optional: Configure retrieval parameters
+  retrievalParams: {
+    topK: 3,
+    minRelevanceScore: 0.7
+  }
+});`
+  },
+  {
+    question: "Which data could be used as a knowledge base?",
+    answer: "Aqyn supports a wide range of knowledge sources including technical documentation, code repositories, API specs, architectural diagrams, and internal wikis. Our document processors handle PDF, Markdown, HTML, JSON, YAML, and various programming language files with proper syntax parsing.",
+  },
+  {
+    question: "How to integrate Aqyn to a website?",
+    answer: "Integration is straightforward via our REST API or TypeScript/Python SDKs. The framework can be deployed as a microservice in your infrastructure.",
+    code: `// TypeScript SDK Integration
+import { AqynClient } from '@aqyn/sdk';
 
-  // 3. Generate response using context
-  const response = await llm.generate(query, relevantDocs);
+const aqyn = new AqynClient({
+  endpoint: process.env.AQYN_API_ENDPOINT,
+  apiKey: process.env.AQYN_API_KEY
+});
 
-  return response;
+// React Hook Example
+function useAqynQuery(question: string) {
+  return useQuery({
+    queryKey: ['aqyn', question],
+    queryFn: () => aqyn.query(question),
+    enabled: !!question
+  });
 }`
   },
   {
-    question: "What types of documents can be processed?",
-    answer: "Our framework supports various document formats including PDF, DOCX, Markdown, and plain text files. We also support code snippets and technical documentation."
-  },
-  {
-    question: "How is the data stored and secured?",
-    answer: "Documents are processed and stored using industry-standard encryption. We use vector databases for efficient retrieval and support both cloud and on-premise deployments."
-  },
-  {
-    question: "What language models are supported?",
-    answer: "We support integration with major language models including GPT-4, Claude, and open-source models like Llama 2 and Mistral."
-  },
-  {
-    question: "Can I customize the RAG pipeline?",
-    answer: "Yes, our framework is highly customizable. You can modify document processing, embedding generation, and retrieval strategies."
-  },
-  {
-    question: "What's the typical response time?",
-    answer: "Response times typically range from 0.5-2 seconds, depending on document complexity and chosen language model."
-  },
-  {
-    question: "How does context window management work?",
-    answer: "We use dynamic context window management to optimize token usage while maintaining response quality."
-  },
-  {
-    question: "Is there support for multiple languages?",
-    answer: "Yes, our framework supports multilingual document processing and generation in over 100 languages."
-  },
-  {
-    question: "What about API rate limiting and quotas?",
-    answer: "We provide configurable rate limiting and usage monitoring to help manage API costs and quotas."
-  },
-  {
-    question: "Can I deploy this in production?",
-    answer: "Yes, our framework is production-ready with support for high availability, monitoring, and scaling."
-  },
-  {
-    question: "How do I integrate Aqyn with my application?",
-    answer: "Integration is straightforward with our SDK. Here's a quick example:",
-    code: `import { AqynClient } from '@aqyn/sdk';
+    question: "How to customize Aqyn pipelines?",
+    answer: "Aqyn offers two types of customizable pipelines: Data Loader pipelines built with Dagster for document processing and embedding generation, and User Flow pipelines designed in LangFlow for query handling. This separation allows for optimized batch processing of documents while maintaining responsive user interactions.",
+    code: `// Dagster Data Loader Pipeline Example
+@pipeline
+def document_processing():
+    documents = load_documents()
+    processed = process_documents(documents)
+    embeddings = generate_embeddings(processed)
+    store_vectors(embeddings)
 
-// Initialize the client
-const aqyn = new AqynClient({
-  apiKey: process.env.AQYN_API_KEY,
-  embeddingModel: 'openai',
-  storageType: 'local'
-});
-
-// Index your documents
-await aqyn.addDocuments([
-  { content: 'Your document text here', metadata: { source: 'docs' } }
-]);
-
-// Query the knowledge base
-const response = await aqyn.query('How does feature X work?');`
+# LangFlow User Query Pipeline
+user_pipeline = Pipeline.from_langflow(
+    "query_pipeline.json",
+    custom_nodes=[
+        DocumentRetriever,
+        ResponseGenerator
+    ]
+)`
+  },
+  {
+    question: "Does it support multilanguage?",
+    answer: "Yes, Aqyn supports multilingual processing and generation. The language support is inherited from the underlying LLM, with OpenAI models providing excellent multilingual capabilities. Document processing maintains language-specific features and metadata.",
+  },
+  {
+    question: "Which LLM models are compatible?",
+    answer: "Currently, Aqyn works with OpenAI's models (GPT-3.5, GPT-4) for both chat completion and embeddings. Our roadmap includes support for custom LLMs and embedding models in upcoming versions, enabling full model customization and local deployment options.",
+  },
+  {
+    question: "Is data enclosed in custom infrastructure when installed on-prem?",
+    answer: "In the current version, while document storage and vector embeddings are fully contained within your infrastructure using Qdrant and MinIO, LLM queries still rely on OpenAI's API. Our roadmap prioritizes complete data sovereignty with upcoming support for on-premise LLMs and embedding models, enabling fully isolated knowledge bases within your security perimeter.",
   }
 ];
 
