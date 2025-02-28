@@ -122,24 +122,11 @@ const FAQ_ITEMS = [
 
 <script src="https://snippet.aqyn.tech/v1/chat.js"></script>
 <script>
-  // Initialize Aqyn Chat
   const aqynChat = new AqynChat({
     apiKey: 'YOUR_API_KEY',
     element: '#aqyn-chat',
     theme: 'light', // or 'dark'
     placeholder: 'Ask about our documentation...'
-  });
-
-  // Handle chat interactions
-  document.getElementById('aqyn-send').addEventListener('click', async () => {
-    const input = document.getElementById('aqyn-input');
-    const question = input.value.trim();
-
-    if (question) {
-      const response = await aqynChat.query(question);
-      input.value = '';
-      // Response will be automatically rendered in the chat interface
-    }
   });
 </script>`
   },
