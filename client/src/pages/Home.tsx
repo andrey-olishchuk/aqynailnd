@@ -140,50 +140,30 @@ const FAQ_ITEMS = [
   },
   {
     question: "How to customize Aqyn pipelines?",
-    answer: "Aqyn leverages Dagster for building data processing pipelines. Here's a basic example of a pipeline that reads text files from a '/data' directory and removes email addresses from the content - demonstrating how you can process your documents before generating embeddings:",
-    code: `# Basic Dagster pipeline example
-from dagster import asset, AssetIn, Output
-import os
+    answer: "Aqyn leverages Dagster for building data processing pipelines. Here's a basic example of a pipeline that loads an HTML file and removes email addresses from its content - demonstrating how you can process your documents before generating embeddings:",
+    code: `from dagster import op, job
 import re
 
-@asset
-def list_data_files():
-    """List all files in the data directory."""
-    files = [f for f in os.listdir("/data") if f.endswith(".txt")]
-    return Output(files, metadata={"file_count": len(files)})
+@op
+def load_html_file() -> str:
+    """Loads content from example.html file"""
+    with open("example.html", "r") as file:
+        return file.read()
 
-@asset(ins={"files": AssetIn("list_data_files")})
-def remove_emails_from_files(files):
-    """Remove email addresses from text files."""
-    email_pattern = r'[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}'
-    processed_files = []
+@op
+def remove_emails(html_content: str) -> str:
+    """Removes email addresses from the HTML content"""
+    # Regular expression pattern for matching email addresses
+    email_pattern = r'[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}'
+    # Replace all email matches with empty string
+    cleaned_content = re.sub(email_pattern, '', html_content)
+    return cleaned_content
 
-    for filename in files:
-        with open(f"/data/{filename}", 'r') as f:
-            content = f.read()
-            # Remove email addresses
-            cleaned_content = re.sub(email_pattern, '[EMAIL REMOVED]', content)
-            # Save processed content
-            output_path = f"/data/processed/{filename}"
-            os.makedirs(os.path.dirname(output_path), exist_ok=True)
-            with open(output_path, 'w') as out_f:
-                out_f.write(cleaned_content)
-            processed_files.append(output_path)
-
-    return Output(
-        processed_files,
-        metadata={
-            "processed_count": len(processed_files),
-            "output_dir": "/data/processed"
-        }
-    )
-
-# Define the job that includes both assets
-from dagster import define_asset_job
-process_files_job = define_asset_job(
-    name="process_files",
-    selection=["list_data_files", "remove_emails_from_files"]
-)`,
+@job
+def html_email_removal_pipeline():
+    """Pipeline that loads HTML and removes emails"""
+    html_content = load_html_file()
+    cleaned_content = remove_emails(html_content)`,
   },
   {
     question: "Does it support multilanguage?",
