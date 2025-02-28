@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aqyn - Self-hosted RAG Applications</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="wave-background"></div>
+        <div class="container">
+            <!-- Logo -->
+            <div class="logo">
+                <div class="logo-square"></div>
+                <span>Aqyn</span>
+            </div>
+
+            <!-- Hero Content -->
+            <div class="hero-content">
+                <h1>Build AI-powered Applications</h1>
+                <p>A framework for building self-hosted Retrieval-Augmented Generation (RAG) applications 
+                with preconfigured, production-ready components based on Python LangFlow, LangChain, 
+                Qdrant vector store, MinIO object storage, and Dagster data pipelines.</p>
+                <div class="hero-buttons">
+                    <button class="btn primary" onclick="focusChat()">Ask Aqyn</button>
+                    <a href="https://github.com/vossmoos/aqynai" target="_blank" rel="noopener noreferrer">
+                        <button class="btn secondary">View on GitHub</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Start and Chat Sections -->
+    <section class="quick-start-chat">
+        <div class="container">
+            <div class="grid-2">
+                <!-- Quick Start Column -->
+                <div class="quick-start">
+                    <h2>Quick Start</h2>
+                    <div class="card">
+                        <p class="text-muted">Get started with Aqyn in minutes:</p>
+                        <pre class="code-block">
+<code># Clone the repository
+git clone https://github.com/vossmoos/aqynai.git
+cd aqyn/docker
+
+# Start all services
+docker compose up -d</code></pre>
+                    </div>
+                </div>
+
+                <!-- Chat Column -->
+                <div class="chat">
+                    <h2>Ask About Aqyn</h2>
+                    <div class="card chat-container">
+                        <div class="chat-messages" id="chatMessages">
+                            <div class="message assistant">
+                                <div class="message-content">
+                                    Hello! I'm your AI assistant. How can I help you understand our framework?
+                                </div>
+                            </div>
+                        </div>
+                        <form id="chatForm" class="chat-input">
+                            <textarea id="messageInput" placeholder="Ask anything about the framework..."></textarea>
+                            <button type="submit" class="btn icon">
+                                <i data-lucide="send"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feature Cards -->
+    <section class="features">
+        <div class="container">
+            <div class="grid-3">
+                <div class="card">
+                    <h3>Automated Data Loaders</h3>
+                    <p>Built-in support for processing and loading the most common document types</p>
+                </div>
+                <div class="card">
+                    <h3>Visual Pipeline Editor</h3>
+                    <p>Intuitive visual interface for building and customizing RAG pipelines</p>
+                </div>
+                <div class="card">
+                    <h3>Python Extensibility</h3>
+                    <p>Extend and customize pipelines with your own Python components</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq">
+        <div class="container">
+            <h2>Technical FAQ</h2>
+            <div class="accordion" id="faqAccordion">
+                <!-- FAQ items will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology Stack -->
+    <section class="tech-stack">
+        <div class="container">
+            <h2>Technology Stack</h2>
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <svg class="tech-icon langflow-icon" viewBox="0 0 100 100">
+                        <path d="M50 5 L90 25 L90 75 L50 95 L10 75 L10 25 Z" />
+                        <path d="M20 80 L80 20 M30 90 L90 30 M10 70 L70 10" />
+                    </svg>
+                    <span>LangFlow</span>
+                </div>
+                <!-- Other tech icons will be added similarly -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Section -->
+    <section class="community">
+        <div class="container">
+            <h2>Connect With Us</h2>
+            <div class="social-links">
+                <a href="https://github.com/vossmoos/aqynai" target="_blank" rel="noopener noreferrer">
+                    <button class="btn secondary">
+                        <i data-lucide="github"></i>
+                        GitHub
+                    </button>
+                </a>
+                <a href="https://www.linkedin.com/company/vossmoos" target="_blank" rel="noopener noreferrer">
+                    <button class="btn secondary">
+                        <i data-lucide="linkedin"></i>
+                        LinkedIn
+                    </button>
+                </a>
+                <a href="https://vossmoos.com" target="_blank" rel="noopener noreferrer">
+                    <button class="btn secondary">
+                        <i data-lucide="globe"></i>
+                        VossMoos
+                    </button>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
