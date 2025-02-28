@@ -114,26 +114,34 @@ const FAQ_ITEMS = [
   {
     question: "What is RAG and how does it work?",
     answer: "RAG (Retrieval Augmented Generation) enhances LLM responses by retrieving relevant context from your knowledge base. It processes documents into embeddings for semantic search, then uses matched content to generate contextually accurate responses.",
-    code: `// Example RAG Pipeline in Aqyn
-const pipeline = new AqynPipeline({
-  documentProcessor: new DocumentProcessor(),
-  embeddingModel: "openai",
-  vectorStore: new QdrantStore(),
-  llm: new OpenAIChat()
-});
+    code: `<!-- Add Aqyn Chat to your website -->
+<div id="aqyn-chat">
+  <textarea id="aqyn-input" placeholder="Ask a question..."></textarea>
+  <button id="aqyn-send">Send</button>
+</div>
 
-// 1. Process and index documents
-await pipeline.indexDocuments(documents);
+<script src="https://snippet.aqyn.tech/v1/chat.js"></script>
+<script>
+  // Initialize Aqyn Chat
+  const aqynChat = new AqynChat({
+    apiKey: 'YOUR_API_KEY',
+    element: '#aqyn-chat',
+    theme: 'light', // or 'dark'
+    placeholder: 'Ask about our documentation...'
+  });
 
-// 2. Query with RAG
-const response = await pipeline.query({
-  question: "How to implement feature X?",
-  // Optional: Configure retrieval parameters
-  retrievalParams: {
-    topK: 3,
-    minRelevanceScore: 0.7
-  }
-});`
+  // Handle chat interactions
+  document.getElementById('aqyn-send').addEventListener('click', async () => {
+    const input = document.getElementById('aqyn-input');
+    const question = input.value.trim();
+
+    if (question) {
+      const response = await aqynChat.query(question);
+      input.value = '';
+      // Response will be automatically rendered in the chat interface
+    }
+  });
+</script>`
   },
   {
     question: "Which data could be used as a knowledge base?",
@@ -157,7 +165,8 @@ function useAqynQuery(question: string) {
     queryFn: () => aqyn.query(question),
     enabled: !!question
   });
-}`
+}
+`
   },
   {
     question: "How to customize Aqyn pipelines?",
@@ -373,7 +382,7 @@ docker compose up -d`}
                     {item.code && (
                       <CodeBlock
                         code={item.code}
-                        language="typescript"
+                        language="html"
                         className="mt-4"
                       />
                     )}
