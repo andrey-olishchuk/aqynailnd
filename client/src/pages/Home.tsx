@@ -140,7 +140,7 @@ const FAQ_ITEMS = [
   },
   {
     question: "How to customize Aqyn pipelines?",
-    answer: "Aqyn leverages Dagster for building data processing pipelines. Here's a basic example of a pipeline that reads text files from a '/data' directory and removes email addresses from the content - demonstrating how you can process your documents before generating embeddings. Below that is an even simpler example showing basic string processing:",
+    answer: "Aqyn leverages Dagster for building data processing pipelines. Here's a basic example of a pipeline that reads text files from a '/data' directory and removes email addresses from the content - demonstrating how you can process your documents before generating embeddings:",
     code: `# Basic Dagster pipeline example
 from dagster import asset, AssetIn, Output
 import os
@@ -183,32 +183,6 @@ from dagster import define_asset_job
 process_files_job = define_asset_job(
     name="process_files",
     selection=["list_data_files", "remove_emails_from_files"]
-)
-
-# Here's an even simpler example showing basic string processing:
-from dagster import asset
-
-@asset
-def input_strings():
-    """Generate some example strings."""
-    return ["hello", "world", "aqyn"]
-
-@asset(ins={"strings": AssetIn("input_strings")})
-def uppercase_strings(strings):
-    """Convert strings to uppercase."""
-    result = [s.upper() for s in strings]
-    return Output(
-        result,
-        metadata={
-            "input_count": len(strings),
-            "example_conversion": f"'{strings[0]}' → '{result[0]}'",
-        }
-    )
-
-# Define a simple job
-simple_job = define_asset_job(
-    name="uppercase_strings",
-    selection=["input_strings", "uppercase_strings"]
 )`,
   },
   {
