@@ -6,12 +6,19 @@ import { Textarea } from "@/components/ui/textarea";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useToast } from "@/hooks/use-toast";
 import { Send } from "lucide-react";
+import { queryClient } from "@/lib/queryClient";
+
+interface Message {
+  id: number;
+  role: "user" | "assistant";
+  content: string;
+}
 
 export default function Chat() {
   const [input, setInput] = useState("");
   const { toast } = useToast();
 
-  const { data: messages, isLoading } = useQuery({
+  const { data: messages = [], isLoading } = useQuery<Message[]>({
     queryKey: ["/api/chat"],
   });
 
@@ -53,7 +60,7 @@ export default function Chat() {
             {isLoading ? (
               <div className="text-center">Loading...</div>
             ) : (
-              messages?.map((msg: any) => (
+              messages.map((msg: Message) => (
                 <div
                   key={msg.id}
                   className={`mb-4 ${
