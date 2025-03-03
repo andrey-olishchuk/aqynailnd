@@ -10,6 +10,9 @@ RUN npm ci
 # Copy source code
 COPY . .
 
+# Fix vite config to properly resolve client/index.html in Docker build
+ENV NODE_ENV=production
+
 # Build the application
 RUN npm run build
 
@@ -24,6 +27,7 @@ RUN npm ci --production
 
 # Copy built app from builder stage
 COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/dist/public ./dist/public
 
 # Set production environment
 ENV NODE_ENV=production
