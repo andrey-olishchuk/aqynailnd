@@ -10,11 +10,24 @@ RUN npm ci
 # Copy source code
 COPY . .
 
-# Fix vite config to properly resolve client/index.html in Docker build
-ENV NODE_ENV=production
+# Create a custom Vite config for Docker build
+RUN echo 'import { defineConfig } from "vite"; \
+import { fileURLToPath } from "url"; \
+import path from "path"; \
+import react from "@vitejs/plugin-react"; \
+const __dirname = path.dirname(fileURLToPath(import.meta.url)); \
+export default defineConfig({ \
+  plugins: [react()], \
+  root: path.resolve(__dirname, "client"), \
+  build: { \
+    outDir: path.resolve(__dirname, "dist/public"), \
+    emptyOutDir: true \
+  } \
+});' > vite.docker.config.js
 
-# Build the application
-RUN npm run build
+# Build the application (using Docker-specific config)
+RUN npx vite build --config vite.docker.config.js && \
+    esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist
 
 # Production image
 FROM node:20-alpine AS runner
@@ -27,7 +40,6 @@ RUN npm ci --production
 
 # Copy built app from builder stage
 COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/dist/public ./dist/public
 
 # Set production environment
 ENV NODE_ENV=production

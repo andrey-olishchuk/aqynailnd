@@ -2,8 +2,8 @@
 #!/bin/bash
 set -e
 
-# Build the Docker image
+echo "Building Docker image for RAGStack application..."
 docker build -t ragstack-app .
 
-# Run the Docker container
+echo "Starting Docker container..."
 docker run -p 5000:5000 ragstack-app
