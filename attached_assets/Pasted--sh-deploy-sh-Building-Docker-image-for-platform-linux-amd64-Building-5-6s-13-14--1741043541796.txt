@@ -1,0 +1,42 @@
+ % sh deploy.sh
+Building Docker image for platform: linux/amd64
+[+] Building 5.6s (13/14)                                                                                                                                                              docker:desktop-linux
+ => [internal] load build definition from Dockerfile                                                                                                                                                   0.0s
+ => => transferring dockerfile: 1.70kB                                                                                                                                                                 0.0s
+ => [internal] load metadata for docker.io/library/node:20-alpine                                                                                                                                      0.9s
+ => [auth] library/node:pull token for registry-1.docker.io                                                                                                                                            0.0s
+ => [internal] load .dockerignore                                                                                                                                                                      0.0s
+ => => transferring context: 184B                                                                                                                                                                      0.0s
+ => [internal] load build context                                                                                                                                                                      0.0s
+ => => transferring context: 2.55kB                                                                                                                                                                    0.0s
+ => [builder 1/7] FROM docker.io/library/node:20-alpine@sha256:053c1d99e608fe9fa0db6821edd84276277c0a663cd181f4a3e59ee20f5f07ea                                                                        0.0s
+ => CACHED [builder 2/7] WORKDIR /app                                                                                                                                                                  0.0s
+ => CACHED [builder 3/7] COPY package*.json ./                                                                                                                                                         0.0s
+ => CACHED [runner 4/5] RUN npm ci --production                                                                                                                                                        0.0s
+ => CACHED [builder 4/7] RUN npm ci                                                                                                                                                                    0.0s
+ => [builder 5/7] COPY . .                                                                                                                                                                             0.0s
+ => [builder 6/7] RUN echo "import { defineConfig } from 'vite';" > vite.docker.config.js &&     echo "import react from '@vitejs/plugin-react';" >> vite.docker.config.js &&     echo "import path f  0.1s
+ => ERROR [builder 7/7] RUN npx vite build --config vite.docker.config.js &&     esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist                       4.5s
+------
+ > [builder 7/7] RUN npx vite build --config vite.docker.config.js &&     esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist:
+4.223 vite v5.4.14 building for production...
+4.406 ✓ 0 modules transformed.
+4.413 x Build failed in 55ms
+4.414 error during build:
+4.414 Could not resolve entry module "client/index.html".
+4.414     at getRollupError (file:///app/node_modules/rollup/dist/es/shared/parseAst.js:396:41)
+4.414     at error (file:///app/node_modules/rollup/dist/es/shared/parseAst.js:392:42)
+4.414     at ModuleLoader.loadEntryModule (file:///app/node_modules/rollup/dist/es/shared/node-entry.js:20086:20)
+4.414     at async Promise.all (index 0)
+------
+Dockerfile:31
+--------------------
+  30 |     # Build the client application first with Docker-specific config
+  31 | >>> RUN npx vite build --config vite.docker.config.js && \
+  32 | >>>     esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist
+  33 |
+--------------------
+ERROR: failed to solve: process "/bin/sh -c npx vite build --config vite.docker.config.js &&     esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist" did not complete successfully: exit code: 1
+
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/xscn89s1neubvvpha3rykaeby
+Docker build failed. Exiting.
