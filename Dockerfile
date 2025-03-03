@@ -9,8 +9,21 @@ RUN npm ci
 # Copy source code
 COPY . .
 
-# Build the client application first
-RUN npx vite build --config vite.config.ts && \
+# Create Docker-specific Vite config that explicitly sets paths
+RUN echo "import { defineConfig } from 'vite'; \
+import react from '@vitejs/plugin-react'; \
+import path from 'path'; \
+export default defineConfig({ \
+  plugins: [react()], \
+  root: path.resolve(__dirname, 'client'), \
+  build: { \
+    outDir: path.resolve(__dirname, 'dist/public'), \
+    emptyOutDir: true \
+  } \
+});" > vite.docker.config.js
+
+# Build the client application first with Docker-specific config
+RUN npx vite build --config vite.docker.config.js && \
     esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist
 
 # Production image
