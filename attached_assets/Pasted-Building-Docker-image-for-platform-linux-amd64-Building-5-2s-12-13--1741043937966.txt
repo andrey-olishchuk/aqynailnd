@@ -1,0 +1,44 @@
+Building Docker image for platform: linux/amd64
+[+] Building 5.2s (12/13)                                                                                                                                                              docker:desktop-linux
+ => [internal] load build definition from Dockerfile                                                                                                                                                   0.0s
+ => => transferring dockerfile: 640B                                                                                                                                                                   0.0s
+ => [internal] load metadata for docker.io/library/node:20-alpine                                                                                                                                      0.9s
+ => [auth] library/node:pull token for registry-1.docker.io                                                                                                                                            0.0s
+ => [internal] load .dockerignore                                                                                                                                                                      0.0s
+ => => transferring context: 184B                                                                                                                                                                      0.0s
+ => [builder 1/6] FROM docker.io/library/node:20-alpine@sha256:053c1d99e608fe9fa0db6821edd84276277c0a663cd181f4a3e59ee20f5f07ea                                                                        0.0s
+ => [internal] load build context                                                                                                                                                                      0.0s
+ => => transferring context: 2.58kB                                                                                                                                                                    0.0s
+ => CACHED [builder 2/6] WORKDIR /app                                                                                                                                                                  0.0s
+ => CACHED [builder 3/6] COPY package*.json ./                                                                                                                                                         0.0s
+ => CACHED [runner 4/5] RUN npm ci --production                                                                                                                                                        0.0s
+ => CACHED [builder 4/6] RUN npm ci                                                                                                                                                                    0.0s
+ => [builder 5/6] COPY . .                                                                                                                                                                             0.0s
+ => ERROR [builder 6/6] RUN npm run build                                                                                                                                                              4.2s
+------
+ > [builder 6/6] RUN npm run build:
+1.380
+1.380 > rest-express@1.0.0 build
+1.380 > vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist
+1.380
+3.895 vite v5.4.14 building for production...
+4.141 ✓ 0 modules transformed.
+4.147 x Build failed in 118ms
+4.148 error during build:
+4.148 Could not resolve entry module "client/index.html".
+4.148     at getRollupError (file:///app/node_modules/rollup/dist/es/shared/parseAst.js:396:41)
+4.148     at error (file:///app/node_modules/rollup/dist/es/shared/parseAst.js:392:42)
+4.148     at ModuleLoader.loadEntryModule (file:///app/node_modules/rollup/dist/es/shared/node-entry.js:20086:20)
+4.148     at async Promise.all (index 0)
+------
+Dockerfile:13
+--------------------
+  11 |
+  12 |     # Build client and server
+  13 | >>> RUN npm run build
+  14 |
+  15 |     # Production image
+--------------------
+ERROR: failed to solve: process "/bin/sh -c npm run build" did not complete successfully: exit code: 1
+
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/0inagnhdhhmbpoy71fs5kbpsd
