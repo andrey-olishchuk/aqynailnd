@@ -324,7 +324,7 @@ docker compose up -d`}
             <div className="p-6 rounded-lg bg-card">
               <h3 className="text-xl font-semibold mb-3">Automated Data Loaders</h3>
               <p className="text-muted-foreground">
-                Built-in support for processing and loading the most common document types
+                Seamlessly process and ingest data using LangChain's extensive collection of data loaders, supporting document types from PDFs to specialized formats with built-in parsing capabilities
               </p>
             </div>
             <div className="p-6 rounded-lg bg-card">
