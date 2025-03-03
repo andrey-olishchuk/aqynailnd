@@ -22,6 +22,9 @@ export default defineConfig({ \
   } \
 });" > vite.docker.config.js
 
+# Set NODE_OPTIONS to ensure proper crypto support
+ENV NODE_OPTIONS=--openssl-legacy-provider
+
 # Build the client application first with Docker-specific config
 RUN npx vite build --config vite.docker.config.js && \
     esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist
