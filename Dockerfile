@@ -1,3 +1,4 @@
+
 FROM node:20-alpine AS builder
 
 WORKDIR /app
@@ -10,17 +11,18 @@ RUN npm ci
 COPY . .
 
 # Create Docker-specific Vite config that explicitly sets paths
-RUN echo "import { defineConfig } from 'vite'; \
-import react from '@vitejs/plugin-react'; \
-import path from 'path'; \
-export default defineConfig({ \
-  plugins: [react()], \
-  root: path.resolve(__dirname, 'client'), \
-  build: { \
-    outDir: path.resolve(__dirname, 'dist/public'), \
-    emptyOutDir: true \
-  } \
-});" > vite.docker.config.js
+RUN echo 'import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import path from "path";
+
+export default defineConfig({
+  plugins: [react()],
+  root: path.resolve(__dirname, "client"),
+  build: {
+    outDir: path.resolve(__dirname, "dist/public"),
+    emptyOutDir: true
+  }
+});' > vite.docker.config.js
 
 # Set NODE_OPTIONS to ensure proper crypto support
 ENV NODE_OPTIONS=--openssl-legacy-provider
