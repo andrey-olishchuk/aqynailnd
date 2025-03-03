@@ -11,7 +11,18 @@ RUN npm ci
 COPY . .
 
 # Create Docker-specific Vite config file
-COPY vite.config.ts vite.docker.config.js
+RUN echo 'import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import path from "path";
+
+export default defineConfig({
+  plugins: [react()],
+  root: "./client",
+  build: {
+    outDir: path.resolve("dist/public"),
+    emptyOutDir: true
+  }
+});' > vite.docker.config.js
 
 # Set NODE_OPTIONS to ensure proper crypto support
 ENV NODE_OPTIONS=--openssl-legacy-provider
