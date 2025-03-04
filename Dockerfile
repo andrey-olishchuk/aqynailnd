@@ -1,34 +1,27 @@
-FROM node:20-alpine AS builder
+# Use Node.js LTS version
+FROM node:20
 
+# Create app directory
 WORKDIR /app
 
-# Copy package files and install dependencies
+# Install dependencies first (caching)
 COPY package*.json ./
 RUN npm ci
 
 # Copy source code
 COPY . .
 
-# Build client and server
+# Build frontend
 RUN npm run build
 
-# Production image
-FROM node:20-alpine AS runner
+# Create non-root user
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
+RUN chown -R nextjs:nodejs /app
+USER nextjs
 
-WORKDIR /app
-
-# Copy package files and install production dependencies only
-COPY package*.json ./
-RUN npm ci --production
-
-# Copy built app from builder stage
-COPY --from=builder /app/dist ./dist
-
-# Set production environment
-ENV NODE_ENV=production
-
-# Expose the port the app runs on
+# Expose port
 EXPOSE 5000
 
-# Start the application
-CMD ["node", "dist/index.js"]
+# Start the server
+CMD ["npm", "run", "start"]

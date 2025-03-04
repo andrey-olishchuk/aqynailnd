@@ -2,8 +2,8 @@
 .git
 .gitignore
 README.md
-client/
-server/
+#client/
+#server/
 node_modules/
 *.log
 
