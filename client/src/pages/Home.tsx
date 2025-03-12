@@ -202,6 +202,7 @@ export default function Home() {
   const [messages, setMessages] = useState(INITIAL_MESSAGES);
   const [input, setInput] = useState("");
   const chatInputRef = useRef<HTMLTextAreaElement>(null);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -282,6 +283,7 @@ export default function Home() {
       );
     } finally {
       setIsLoading(false);
+      messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
@@ -358,9 +360,12 @@ docker compose up -d`}
               <Card className="backdrop-blur-sm bg-card/50">
                 <div className="h-[500px] flex flex-col">
                   <ScrollArea className="flex-1 p-4">
-                    {messages.map((msg) => (
-                      <ChatMessage key={msg.id} message={msg} />
-                    ))}
+                    <div className="flex-1 overflow-auto p-4">
+                      {messages.map((message) => (
+                        <ChatMessage key={message.id} message={message} />
+                      ))}
+                      <div ref={messagesEndRef} />
+                    </div>
                   </ScrollArea>
                   <form onSubmit={handleSubmit} className="p-4 border-t">
                     <div className="flex gap-2">
