@@ -39,8 +39,15 @@ export async function generateChatResponse(messages: Array<{ role: string, conte
     // Log the full response for debugging
     console.log("Langflow API response:", JSON.stringify(response.data, null, 2));
     
-    // Extract the response from Langflow - check different possible paths
-    const result = response.data.result || response.data.response || response.data.answer || response.data.output;
+    // Extract the response from Langflow - based on the actual response structure
+    let result = null;
+    
+    // Try to extract from the correct path based on the logs
+    if (response.data?.outputs && 
+        response.data.outputs[0]?.outputs && 
+        response.data.outputs[0].outputs[0]?.artifacts?.message) {
+      result = response.data.outputs[0].outputs[0].artifacts.message;
+    }
     
     return {
       message: result 
