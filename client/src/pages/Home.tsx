@@ -230,6 +230,11 @@ export default function Home() {
     setMessages(prev => [...prev, loadingMessage]);
     setInput("");
     setIsLoading(true);
+    
+    // Scroll to the new loading message
+    setTimeout(() => {
+      messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }, 100);e);
 
     try {
       // Call the backend API to get a response
