@@ -192,7 +192,7 @@ const ChatMessage = ({ message }: { message: any }) => {
             : "bg-muted"
         }`}
       >
-        {message.isLoading ? "...": message.content} {/* Placeholder for loading and typing effect */}
+        {message.isLoading ? "Thinking..." : message.content} {/* Changed loading message */}
       </div>
     </div>
   );
