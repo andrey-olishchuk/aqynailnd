@@ -234,7 +234,7 @@ export default function Home() {
     // Scroll to the new loading message
     setTimeout(() => {
       messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-    }, 100);e);
+    }, 100);
 
     try {
       // Call the backend API to get a response
