@@ -184,7 +184,9 @@ export default function Home() {
   const [input, setInput] = useState("");
   const chatInputRef = useRef<HTMLTextAreaElement>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!input.trim()) return;
 
@@ -194,14 +196,73 @@ export default function Home() {
       content: input,
     };
 
-    const aiResponse = {
+    // Add user message immediately
+    setMessages(prev => [...prev, userMessage]);
+    
+    // Create a placeholder for AI response with loading state
+    const loadingMessage = {
       id: messages.length + 2,
       role: "assistant",
-      content: "This is a simulated response. In the actual implementation, this would be replaced with real AI responses based on the documentation.",
+      content: "...",
+      isLoading: true
     };
-
-    setMessages([...messages, userMessage, aiResponse]);
+    
+    setMessages(prev => [...prev, loadingMessage]);
     setInput("");
+    setIsLoading(true);
+
+    try {
+      // Call the backend API to get a response
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          role: "user",
+          content: userMessage.content,
+          metadata: {
+            timestamp: new Date().toISOString()
+          }
+        }),
+      });
+      
+      const data = await response.json();
+      
+      // Parse the AI response
+      const aiResponseContent = JSON.parse(data.aiMessage.content);
+      
+      // Update messages replacing the loading message
+      setMessages(prev => 
+        prev.map(msg => 
+          msg.id === loadingMessage.id 
+            ? {
+                id: msg.id,
+                role: "assistant",
+                content: aiResponseContent.message,
+                suggestions: aiResponseContent.suggestions,
+                context: aiResponseContent.context
+              }
+            : msg
+        )
+      );
+    } catch (error) {
+      console.error('Error fetching response:', error);
+      // Update with error message
+      setMessages(prev => 
+        prev.map(msg => 
+          msg.id === loadingMessage.id 
+            ? {
+                id: msg.id,
+                role: "assistant",
+                content: "Sorry, I encountered an error. Please try again."
+              }
+            : msg
+        )
+      );
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const focusChat = () => {

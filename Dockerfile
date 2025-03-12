@@ -23,5 +23,8 @@ USER nextjs
 # Expose port
 EXPOSE 5000
 
+# Environment variables
+ENV LANGFLOW_API_KEY=""
+
 # Start the server
 CMD ["npm", "run", "start"]

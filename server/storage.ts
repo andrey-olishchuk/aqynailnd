@@ -1,32 +1,29 @@
-import { ChatMessage, InsertChatMessage } from "@shared/schema";
 
-export interface IStorage {
-  getChatMessages(): Promise<ChatMessage[]>;
-  addChatMessage(message: InsertChatMessage): Promise<ChatMessage>;
+interface ChatMessage {
+  id?: number;
+  role: string;
+  content: string;
+  metadata?: Record<string, any>;
+  timestamp?: string;
 }
 
-export class MemStorage implements IStorage {
-  private messages: ChatMessage[];
-  private currentId: number;
-
-  constructor() {
-    this.messages = [];
-    this.currentId = 1;
-  }
+class InMemoryStorage {
+  private messages: ChatMessage[] = [];
+  private nextId = 1;
 
   async getChatMessages(): Promise<ChatMessage[]> {
-    return this.messages;
+    return [...this.messages];
   }
 
-  async addChatMessage(message: InsertChatMessage): Promise<ChatMessage> {
-    const newMessage: ChatMessage = {
-      id: this.currentId++,
-      timestamp: new Date(),
-      ...message
+  async addChatMessage(message: ChatMessage): Promise<ChatMessage> {
+    const newMessage = {
+      ...message,
+      id: this.nextId++,
+      timestamp: message.timestamp || new Date().toISOString()
     };
     this.messages.push(newMessage);
     return newMessage;
   }
 }
 
-export const storage = new MemStorage();
+export const storage = new InMemoryStorage();

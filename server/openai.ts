@@ -1,31 +1,56 @@
-// Simulated OpenAI responses for development
+
+import axios from 'axios';
+
+const LANGFLOW_API_URL = "https://rag.aqyn.tech/api/v1/run/288955b1-06e0-4abe-a127-07402b078108?stream=false";
+const LANGFLOW_API_KEY = process.env.LANGFLOW_API_KEY || "";
+
+// Connect to the Langflow RAG backend
 export async function generateChatResponse(messages: Array<{ role: string, content: string }>) {
-  // Simulate processing time
-  await new Promise(resolve => setTimeout(resolve, 1000));
+  try {
+    const lastMessage = messages[messages.length - 1];
+    
+    const response = await axios.post(
+      LANGFLOW_API_URL,
+      {
+        input_value: lastMessage.content,
+        output_type: "chat",
+        input_type: "chat",
+        tweaks: {
+          "OpenAIEmbeddings-Zv16Z": {},
+          "QdrantVectorStoreComponent-2sWo4": {},
+          "ParseData-2yCzQ": {},
+          "OpenAIModel-YykcL": {},
+          "Prompt (NLaI9)-5Fbbo": {},
+          "ChatOutput-XyiQD": {},
+          "ChatInput-DXe0c": {}
+        }
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': LANGFLOW_API_KEY
+        }
+      }
+    );
 
-  const lastMessage = messages[messages.length - 1];
-  const response = {
-    message: "I am a simulated AI assistant. Here's what I found in the documentation:",
-    context: `You asked: ${lastMessage.content}`,
-    suggestions: [
-      "Try using the LangChain integration",
-      "Check out our Qdrant vector store setup",
-      "Review the Dagster pipeline documentation"
-    ],
-    code_example: `
-# Example RAG setup
-from langchain import RAGChain
-from qdrant import QdrantClient
-
-client = QdrantClient()
-rag_chain = RAGChain.from_components(
-    retriever=client,
-    prompt_template="Answer: {context}"
-)
-    `
-  };
-
-  return response;
+    // Extract the response from Langflow
+    return {
+      message: response.data.result || "I couldn't find information about that in my knowledge base.",
+      context: `You asked: ${lastMessage.content}`,
+      suggestions: [
+        "Tell me more about Aqyn's features",
+        "How does RAG work in Aqyn?",
+        "What integrations does Aqyn support?"
+      ]
+    };
+  } catch (error) {
+    console.error("Error connecting to Langflow:", error);
+    return {
+      message: "I'm sorry, I encountered an error while processing your request. Please try again later.",
+      context: "Error connecting to knowledge base",
+      suggestions: ["Try a simpler question", "Check documentation manually"]
+    };
+  }
 }
 
 export async function analyzeImage(base64Image: string): Promise<string> {
