@@ -2,10 +2,9 @@
 import axios from 'axios';
 
 const LANGFLOW_API_URL = "https://rag.aqyn.tech/api/v1/run/288955b1-06e0-4abe-a127-07402b078108?stream=false";
-// Using the provided API key directly for testing
-const LANGFLOW_API_KEY = "s47ac10b-58c0-4372-a567-0s02b2c3d422";
-console.log("API Key length:", LANGFLOW_API_KEY.length);
-console.log("API Key value:", LANGFLOW_API_KEY);
+// Get API key from environment variable or use the new key
+const LANGFLOW_API_KEY = process.env.LANGFLOW_API_KEY || "";
+console.log("API Key available:", LANGFLOW_API_KEY ? "Yes" : "No");
 
 // Connect to the Langflow RAG backend
 export async function generateChatResponse(messages: Array<{ role: string, content: string }>) {
