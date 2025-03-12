@@ -25,6 +25,7 @@ EXPOSE 5000
 
 # Environment variables
 ENV LANGFLOW_API_KEY=""
+ENV PORT=5000
 
 # Start the server
 CMD ["npm", "run", "start"]
