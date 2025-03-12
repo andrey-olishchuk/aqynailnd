@@ -260,7 +260,8 @@ export default function Home() {
                 role: "assistant",
                 content: aiResponseContent.message,
                 suggestions: aiResponseContent.suggestions,
-                context: aiResponseContent.context
+                context: aiResponseContent.context,
+                isLoading: false
               }
             : msg
         )

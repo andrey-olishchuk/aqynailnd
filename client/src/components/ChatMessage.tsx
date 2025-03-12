@@ -60,44 +60,4 @@ export default function ChatMessage({ message }: ChatMessageProps) {
     </div>
   );
 }
-import React from "react";
-import { AnimatedDots } from "./AnimatedDots";
-import { TypedResponse } from "./TypedResponse";
-
-interface ChatMessageProps {
-  message: {
-    role: string;
-    content: string;
-    isLoading?: boolean;
-    suggestions?: string[];
-    context?: string;
-  };
-}
-
-export function ChatMessage({ message }: ChatMessageProps) {
-  const isUser = message.role === "user";
-  
-  return (
-    <div
-      className={`mb-4 ${
-        isUser ? "text-right" : "text-left"
-      }`}
-    >
-      <div
-        className={`inline-block p-3 rounded-lg ${
-          isUser
-            ? "bg-primary text-primary-foreground"
-            : "bg-muted"
-        }`}
-      >
-        {message.isLoading ? (
-          <AnimatedDots />
-        ) : isUser ? (
-          message.content
-        ) : (
-          <TypedResponse text={message.content} />
-        )}
-      </div>
-    </div>
-  );
-}
+// Component moved to Home.tsx
