@@ -36,9 +36,16 @@ export async function generateChatResponse(messages: Array<{ role: string, conte
       }
     );
 
-    // Extract the response from Langflow
+    // Log the full response for debugging
+    console.log("Langflow API response:", JSON.stringify(response.data, null, 2));
+    
+    // Extract the response from Langflow - check different possible paths
+    const result = response.data.result || response.data.response || response.data.answer || response.data.output;
+    
     return {
-      message: response.data.result || "I couldn't find information about that in my knowledge base.",
+      message: result 
+        ? result 
+        : "I couldn't find information about that in my knowledge base. (Response format may be unexpected)",
       context: `You asked: ${lastMessage.content}`,
       suggestions: [
         "Tell me more about Aqyn's features",
