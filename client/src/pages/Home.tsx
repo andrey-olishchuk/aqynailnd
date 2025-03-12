@@ -179,6 +179,25 @@ def html_email_removal_pipeline():
   }
 ];
 
+const ChatMessage = ({ message }: { message: any }) => {
+  return (
+    <div
+      key={message.id}
+      className={`mb-4 ${message.role === "user" ? "text-right" : "text-left"}`}
+    >
+      <div
+        className={`inline-block p-3 rounded-lg ${
+          message.role === "user"
+            ? "bg-primary text-primary-foreground"
+            : "bg-muted"
+        }`}
+      >
+        {message.isLoading ? "...": message.content} {/* Placeholder for loading and typing effect */}
+      </div>
+    </div>
+  );
+};
+
 export default function Home() {
   const [messages, setMessages] = useState(INITIAL_MESSAGES);
   const [input, setInput] = useState("");
@@ -198,7 +217,7 @@ export default function Home() {
 
     // Add user message immediately
     setMessages(prev => [...prev, userMessage]);
-    
+
     // Create a placeholder for AI response with loading state
     const loadingMessage = {
       id: messages.length + 2,
@@ -206,7 +225,7 @@ export default function Home() {
       content: "...",
       isLoading: true
     };
-    
+
     setMessages(prev => [...prev, loadingMessage]);
     setInput("");
     setIsLoading(true);
@@ -226,12 +245,12 @@ export default function Home() {
           }
         }),
       });
-      
+
       const data = await response.json();
-      
+
       // Parse the AI response
       const aiResponseContent = JSON.parse(data.aiMessage.content);
-      
+
       // Update messages replacing the loading message
       setMessages(prev => 
         prev.map(msg => 
@@ -339,22 +358,7 @@ docker compose up -d`}
                 <div className="h-[500px] flex flex-col">
                   <ScrollArea className="flex-1 p-4">
                     {messages.map((msg) => (
-                      <div
-                        key={msg.id}
-                        className={`mb-4 ${
-                          msg.role === "user" ? "text-right" : "text-left"
-                        }`}
-                      >
-                        <div
-                          className={`inline-block p-3 rounded-lg ${
-                            msg.role === "user"
-                              ? "bg-primary text-primary-foreground"
-                              : "bg-muted"
-                          }`}
-                        >
-                          {msg.content}
-                        </div>
-                      </div>
+                      <ChatMessage key={msg.id} message={msg} />
                     ))}
                   </ScrollArea>
                   <form onSubmit={handleSubmit} className="p-4 border-t">
