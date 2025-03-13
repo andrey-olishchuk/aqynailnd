@@ -7,6 +7,9 @@ PLATFORM="linux/amd64"
 
 echo "Building Docker image for platform: $PLATFORM"
 
+# Make scripts executable
+chmod +x build.sh
+
 # Build the Docker image with platform targeting
 docker build --platform $PLATFORM -t $IMAGE_NAME . || { 
   echo "Docker build failed. Exiting."

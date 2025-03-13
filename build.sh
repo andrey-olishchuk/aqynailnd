@@ -2,7 +2,7 @@
 #!/bin/bash
 set -e
 
-echo "Building application without Docker..."
+echo "Building application..."
 
 # Install dependencies if needed
 npm ci
@@ -11,4 +11,4 @@ npm ci
 npm run build
 
 echo "Build completed successfully."
-echo "You can run the application with: npm run start"
+echo "You can run the application with: npm start"
