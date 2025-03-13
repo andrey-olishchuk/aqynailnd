@@ -44,7 +44,8 @@ export default defineConfig({
   // Improve CSS loading
   css: {
     postcss: {
-      plugins: [require('tailwindcss'), require('autoprefixer')]
+      // Remove the dynamic require of tailwindcss
+      plugins: []
     },
     devSourcemap: true
   }
