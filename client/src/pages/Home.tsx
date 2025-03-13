@@ -320,7 +320,7 @@ export default function Home() {
             <p className="text-xl text-muted-foreground mb-8">
               A framework for building self-hosted Retrieval-Augmented Generation (RAG) applications 
               with preconfigured, production-ready components based on Python LangFlow, LangChain, 
-              Qdrant vector store, MinIO object storage, and Dagster data pipelines. Create professional AI powered knowledge bases.
+              Qdrant vector store, MinIO object storage, and Dagster data pipelines. Create professional AI powered knowledge bases with Aqyn!
             </p>
             <div className="flex gap-4 justify-center">
               <Button size="lg" onClick={() => focusChat()}>Ask Aqyn</Button>
@@ -406,7 +406,7 @@ docker compose up -d`}
             <div className="p-6 rounded-lg bg-card">
               <h3 className="text-xl font-semibold mb-3">Visual Pipeline Editor</h3>
               <p className="text-muted-foreground">
-                Intuitive visual interface for building and customizing RAG pipelines
+                Leverage LangFlow's intuitive visual interface for building and customizing RAG pipelines
               </p>
             </div>
             <div className="p-6 rounded-lg bg-card">
