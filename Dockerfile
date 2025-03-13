@@ -33,4 +33,5 @@ ENV HOST=0.0.0.0
 
 # Start the server with dumb-init to handle signals properly
 ENTRYPOINT ["dumb-init", "--"]
-CMD ["node", "dist/index.js"]
+# Use explicit command to ensure proper execution in Cloud Run
+CMD ["sh", "-c", "node dist/index.js"]
