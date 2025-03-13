@@ -55,6 +55,10 @@ app.use((req, res, next) => {
     await setupVite(app, server);
   } else {
     serveStatic(app);
+    // Create __dirname equivalent for ES modules
+    const __filename = fileURLToPath(import.meta.url);
+    const __dirname = path.dirname(__filename);
+    
     // Serve static files from dist/public in production
     app.use(express.static(path.resolve(__dirname, "../public")));
 
