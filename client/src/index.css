@@ -33,3 +33,19 @@
   --input: 12 6.5% 15.1%;
   --ring: 24 95% 60%;
 }
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Add any global styles after this point */
+body {
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}

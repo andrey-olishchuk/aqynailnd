@@ -20,12 +20,31 @@ export default defineConfig({
   root: path.resolve(__dirname, 'client'),
   build: {
     outDir: path.resolve(__dirname, 'dist/public'),
-    emptyOutDir: true
+    emptyOutDir: true,
+    assetsDir: 'assets',
+    // Make sure CSS is properly processed and extracted
+    cssCodeSplit: true,
+    // Make sure source files are fully processed
+    sourcemap: false,
+    // Improve asset handling
+    rollupOptions: {
+      output: {
+        manualChunks: undefined
+      }
+    }
   },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'client/src'),
       '@shared': path.resolve(__dirname, 'shared')
+    }
+  },
+  // Add base path to ensure assets are loaded from the correct location
+  base: '/',
+  // Improve CSS loading
+  css: {
+    postcss: {
+      plugins: [require('tailwindcss'), require('autoprefixer')]
     }
   }
 });

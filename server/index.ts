@@ -1,6 +1,7 @@
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
+import path from 'path';
 
 const app = express();
 app.use(express.json());
@@ -54,6 +55,14 @@ app.use((req, res, next) => {
     await setupVite(app, server);
   } else {
     serveStatic(app);
+    // Serve static files from dist/public in production
+    app.use(express.static(path.resolve(__dirname, "../public")));
+
+    // Configure additional static file handling in production
+    if (process.env.NODE_ENV === 'production') {
+      const { configureStaticFiles } = await import('./docker-server-fix.js');
+      configureStaticFiles(app);
+    }
   }
 
   // ALWAYS serve the app on port 5000
