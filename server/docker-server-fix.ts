@@ -29,10 +29,26 @@ export function configureStaticFiles(app: Express) {
   // Handle assets directory specifically
   const assetsPath = path.join(publicPath, 'assets');
   if (fs.existsSync(assetsPath)) {
-    console.log('Assets directory exists, serving static files from:', assetsPath);
-    app.use('/assets', (req, res, next) => {
-      console.log('Serving asset:', req.path);
-      next();
-    });
+    app.use('/assets', express.static(assetsPath));
+    console.log('Assets directory exists at:', assetsPath);
+    
+    // Log all assets for debugging
+    const assetFiles = fs.readdirSync(assetsPath, { recursive: true });
+    console.log('Assets:', assetFiles);
   }
+  
+  // Ensure all routes without a specific handler redirect to index.html for SPA
+  app.get('*', (req, res, next) => {
+    // Skip API routes
+    if (req.path.startsWith('/api')) {
+      return next();
+    }
+    
+    const indexPath = path.join(publicPath, 'index.html');
+    if (fs.existsSync(indexPath)) {
+      res.sendFile(indexPath);
+    } else {
+      next();
+    }
+  });
 }

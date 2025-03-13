@@ -60,6 +60,8 @@ app.use((req, res, next) => {
 
     // Configure additional static file handling in production
     if (process.env.NODE_ENV === 'production') {
+      // Re-import express for the docker-server-fix
+      const express = await import('express');
       const { configureStaticFiles } = await import('./docker-server-fix.js');
       configureStaticFiles(app);
     }
