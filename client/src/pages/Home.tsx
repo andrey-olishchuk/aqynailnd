@@ -315,12 +315,12 @@ export default function Home() {
           {/* Hero Content */}
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-5xl font-bold tracking-tight mb-6">
-              Build AI-powered Applications
+              Build AI-powered Agents
             </h1>
             <p className="text-xl text-muted-foreground mb-8">
               A framework for building self-hosted Retrieval-Augmented Generation (RAG) applications 
               with preconfigured, production-ready components based on Python LangFlow, LangChain, 
-              Qdrant vector store, MinIO object storage, and Dagster data pipelines.
+              Qdrant vector store, MinIO object storage, and Dagster data pipelines. Create professional AI powered knowledge bases.
             </p>
             <div className="flex gap-4 justify-center">
               <Button size="lg" onClick={() => focusChat()}>Ask Aqyn</Button>
